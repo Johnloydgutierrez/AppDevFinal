@@ -29,7 +29,7 @@
             <th>Model</th>
             <th>Quantity</th>
             <th>Price</th>
-            <th>Action</th>
+            
           </tr>
           <tr v-for="info in info" :key="info.id">
             <td>{{ info.name }}</td>
@@ -38,7 +38,7 @@
             <td>{{ info.model }}</td>
             <td>{{ info.quantity }}</td>
             <td>{{ info.price }}</td>
-            <td><button @click="deleteRecord(info.id)">Delete</button></td>
+            
           </tr>
         </table>
       </div>
@@ -63,21 +63,17 @@ export default {
     this.getInfo();
   },
   methods: {
-    async deleteRecord(id) {
-     await axios.post("del",{
-      id: id,
-     });
-     
-     console.log(id);
-     this.getInfo();
-    },
+    
     async getInfo() {
       try {
         const inf = await axios.get('getData');
         this.info = inf.data;
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error(error);
       }
+
+      
+     this.getInfo();
     },
   },
 };

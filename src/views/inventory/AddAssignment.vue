@@ -80,7 +80,7 @@ export default {
 
 .sidebar {
   width: 300px;
-  background-color: #4CAF50;
+  background-color: #333; /* Dark gray background color */
   border-radius: 10px;
   overflow: hidden;
   margin-right: 20px;
@@ -91,31 +91,34 @@ export default {
   padding: 20px;
 }
 
+
+
 .custom-table {
   border-collapse: collapse;
   width: 100%;
-  border: 2px solid #2ecc71; /* Green Border color */
+  border: 2px solid #555; /* Border color */
   border-radius: 10px;
   overflow: hidden;
 }
 
 .custom-table th,
 .custom-table td {
-  border: 1px solid #2ecc71;
+  border: 1px solid #555;
   padding: 15px; /* Adjusted padding */
   text-align: center;
 }
 
 .custom-table th {
-  background-color: #2ecc71; /* Green Header background color */
-  color: #ffffff;
+  background-color: #555; /* Dark gray header background color */
+  color: #fff; /* White text color */
 }
 
 .custom-table tr:nth-child(even) {
-  background-color: #27ae60; /* Darker green background for even rows */
+  background-color: #444; /* Darker gray background for even rows */
 }
 
 .custom-table tr:hover {
-  background-color: #239e5d; /* Darker green background on hover */
+  background-color: #333; /* Darker gray background on hover */
 }
 </style>
+

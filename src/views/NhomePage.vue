@@ -16,20 +16,20 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <router-link to="/" class="navbar-brand">NWOW E-Bike</router-link>
+      <a href="/" class="navbar-brand">NWOW E-Bike</a >
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link to="/" class="nav-link">Home</router-link>
+            <a href="/" class="nav-link">Home</a >
           </li>
           <li class="nav-item">
-            <router-link to="/Contact" class="nav-link">Contact</router-link>
+            <a href="/Contact" class="nav-link">Contact</a>
           </li>
           <li class="nav-item">
-            <router-link to="/Login" class="nav-link">Sign In</router-link>
+            <a href="/Login" class="nav-link">Sign In</a>
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@
             
             <!-- Header-->
             
-            <header class="bg-blue py-5">
+            <header class="bg-green py-5">
                             <div>
                 <header class="bg- py-5">
                 <div class="container px-5">
@@ -137,19 +137,13 @@
 
         </div>
         <!-- Call to action-->
-        <aside class="bg-blue bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+        <aside class="bg-green  rounded-3 p-4 p-sm-5 mt-5">
             <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                 <div class="mb-4 mb-xl-0">
-                    <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
-                    <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
+                    <div class="fs-3 fw-bold text-black">Welcome to NWOW eBike Administration Portal!</div>
+                    <div class="text-black-50">On behalf of the entire NWOW eBike team, we extend a warm welcome to you as the newest addition to our administration team. We are thrilled to have someone with your expertise and dedication on board, and we are confident that your contributions will play a key role in driving the success of NWOW eBike.</div>
                 </div>
-                <div class="ms-xl-4">
-                    <div class="input-group mb-2">
-                        <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                        <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                    </div>
-                    <div class="small text-white-50">We care about privacy and will never share your data.</div>
-                </div>
+                
             </div>
         </aside>
     </div>

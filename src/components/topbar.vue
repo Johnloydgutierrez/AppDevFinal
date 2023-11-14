@@ -2,7 +2,7 @@
     <div id="content">
   
       <!-- Topbar -->
-      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <nav class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow">
   
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -173,6 +173,21 @@
     <!-- Content Row -->
 
     <div class="row">
+       <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Welcome to Administrator Dashboard</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                            src="https://pro97472804-pic2.ysjianzhan.cn/upload/lzkt.png" alt="...">
+                    </div>
+                    <p style = "text-align: center;"> As an administrator, you are an essential part of our mission to revolutionize the <br>
+                       way people experience urban transportation. 
+                      Your role is pivotal in ensuring the smooth operation of our eBike services and maintaining the high standards of quality and efficiency that NWOW eBike is known for.</p>
+                    <a target="_blank" rel="nofollow" href="https://www.nwow.com.ph/">NWOW Philipines Website &rarr;</a>
+                </div>
+            </div>
 
         <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7">
@@ -264,23 +279,7 @@
         <div class="col-lg-6 mb-4">
 
             <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                            src="img/undraw_posting_photo.svg" alt="...">
-                    </div>
-                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                        constantly updated collection of beautiful svg images that you can use
-                        completely free and without attribution!</p>
-                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                        unDraw &rarr;</a>
-                </div>
-            </div>
+           
 
             <!-- Approach -->
            

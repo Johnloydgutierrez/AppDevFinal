@@ -68,8 +68,8 @@ export default {
       this.contact ='';
       this.costumer ='';
 
-      this.$emit('data-save');
-      this.getInfo();
+      this.$emit('data-saved');
+          this.getInfo(id);
       console.log(staff,description,location,contact,costumer)
 
         
