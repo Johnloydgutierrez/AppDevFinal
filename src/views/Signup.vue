@@ -1,4 +1,3 @@
-Rostum Liquigan
 <template> 
 
         <v-sheet width="300" class="mx-auto"> 
