@@ -140,7 +140,10 @@
         <aside class="bg-green  rounded-3 p-4 p-sm-5 mt-5">
             <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                 <div class="mb-4 mb-xl-0">
-                    <div class="fs-3 fw-bold text-black">Welcome to NWOW eBike Administration Portal!</div>
+                    <div class="d-flex justify-content-center align-items-center text-center vh-10">
+  <div class="fs-3 fw-bold text-black">Welcome to NWOW eBike Administration Portal!</div>
+</div>
+
                     <div class="text-black-50">On behalf of the entire NWOW eBike team, we extend a warm welcome to you as the newest addition to our administration team. We are thrilled to have someone with your expertise and dedication on board, and we are confident that your contributions will play a key role in driving the success of NWOW eBike.</div>
                 </div>
                 
