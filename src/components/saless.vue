@@ -188,22 +188,30 @@
       <form>
         <div class="mb-3">
           <label for="date" class="form-label">Date</label>
-          <input type="date" class="form-control" placeholder="Date" >
+          <input type="date" class="form-control" placeholder="Date" v-model="date">
         </div>
   
         <div class="mb-3">
           <label for="invoice" class="form-label">Invoice</label>
-          <input type="text" class="form-control" placeholder="Invoice" >
+          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice">
         </div>
   
         <div class="mb-3">
           <label for="customer" class="form-label">Customer</label>
-          <input type="text" class="form-control" placeholder="Customer" >
+          <input type="text" class="form-control" placeholder="Customer" v-model="customer">
         </div>
 
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
-          <select name="category" class="form-select">
+          <select name="category" class="form-select" v-model="category">
+  <option value="" disabled selected>Select option</option>
+  
+  </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="product" class="form-label">Product</label>
+          <select name="product" class="form-select" v-model="product">
   <option value="" disabled selected>Select option</option>
   
   </select>
@@ -211,22 +219,19 @@
         
   
         <div class="mb-3">
-          <label for="amount" class="form-label">Amount</label>
-          <input type="text" class="form-control" placeholder="Amount" >
-        </div>
-  
-        <div class="mb-3">
-          <label for="Status" class="form-label">Status</label>
-          <input type="text" class="form-control" placeholder="Status">
-        </div>
-  
-        <div class="mb-3">
-          <label for="method">Payment Method</label>
-          <select name="method" id="method" class="form-select">
+          <label for="paymentt" class="form-label">Payment Type</label>
+          <select name="paymentt" class="form-select" v-model="paymentt">
   <option value="" disabled selected>Select option</option>
-  <option value="cashier">Cashier</option>
-  <option value="gcash">Gcash</option></select> 
+  <option value="paid" disabled selected>Paid</option>
+  <option value="installment" disabled selected>Installment</option>
+  </select>
         </div>
+  
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount</label>
+          <input type="text" class="form-control" placeholder="Amount" v-model="amount">
+        </div>
+  
         <button type="submit" class="btn btn-danger">Invoice</button>
       </form>
     </div>
