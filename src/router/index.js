@@ -5,8 +5,9 @@ import NhomePage from '../views/NhomePage.vue'
 
 const routes = [
   {
-    path: '/',
-    component: NhomePage
+    path: '/Nhome',
+    component: NhomePage,
+    // meta :{requiresAuth: true}
   },
   
   {
@@ -19,7 +20,7 @@ const routes = [
   },
   
   {
-    path: '/Login',
+    path: '/',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -106,6 +107,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/sales/Sales.vue')
   },
+  
 
 ]
 
@@ -113,5 +115,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
+// router.beforeEach((to,from,next)=>{
+// const isLoggedin = checkUserLogin();
+// });
 export default router

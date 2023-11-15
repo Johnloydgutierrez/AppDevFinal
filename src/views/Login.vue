@@ -1,106 +1,71 @@
 <template>
-  
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <router-link to="/" class="navbar-brand">BACK</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/Contact" class="nav-link">Contact</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/Signup" class="nav-link">Sign In</router-link>
-          </li>
-        </ul>
-      </div>
+  <div class="container d-flex align-items-center justify-content-center h-100">
+    <div class="v-container theme-container">
+      <img src="https://prof562e926-pic5.ysjianzhan.cn/upload/3002.png" alt="Logo" class="logo-image mb-4">
+      <v-sheet width="300" class="mx-auto">
+        <v-form @submit.prevent="login">
+          <div v-if="message === 'error'" class="error-message">Invalid response</div>
+
+          <v-text-field v-model="username" label="Username"></v-text-field>
+          <v-text-field v-model="password" label="Password" type="password"></v-text-field>
+
+          <v-btn type="submit" block class="mt-3">Submit</v-btn>
+          <router-link to="/signup" class="d-block mt-2">Register</router-link>
+        </v-form>
+      </v-sheet>
     </div>
-  </nav>
-              <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <!-- Section: Design Block -->
-    <section class="text-center text-lg-start">
-      <div class="card mb-3">
-        <div class="row g-0 d-flex align-items-center">
-          <div class="col-lg-4 d-none d-lg-flex">
-            <img src="https://tse1.mm.bing.net/th?id=OIP.ZjUqDl7uXOFCE55kYXTQkQAAAA&pid=Api&P=0&h=220" alt="Trendy Pants and Shoes" class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" style="margin-left:20px;"/>
-          </div>
-          <div class="col-lg-8">
-            <div class="card-body py-5 px-md-5">
-              <h3 class="mb-5 text-uppercase">Sign In</h3>
-              <form>
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="email" id="form2Example1" class="form-control" />
-                  <label class="form-label" for="form2Example1">Admin</label>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <input type="password" id="form2Example2" class="form-control" />
-                  <label class="form-label" for="form2Example2">Password</label>
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <div class="row mb-4">
-                  <div class="col d-flex justify-content-center align-items-center">
-                    <!-- Checkbox -->
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                      <label class="form-check-label" for="form2Example31"> Remember me </label>
-                    </div>
-                  </div>
-
-                  <div class="col text-center">
-                    <!-- Simple link -->
-                    <a href="#!">Forgot password?</a>
-                  </div>
-                </div>
-
-                <!-- Submit button -->
-                <div class="d-flex align-items-center justify-content-center pb-4">
-                  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-                </div>
-                
-                <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <router-link to="/Signup">
-                    <button type="button"  class="btn btn-outline-danger" >Sign Up</button>
-                    </router-link>
-                  </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
-<!-- Section: Design Block -->
-    
 </template>
-<style>
 
-@import'../assets/asset/css/nfront.css';
+<script>
+import router from '@/router';
+import axios from 'axios';
 
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      message: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const { data } = await axios.post('login', {
+          username: this.username,
+          password: this.password,
+        });
 
+        this.message = data.msg;
 
-    .rounded-t-5 {
-      border-top-left-radius: 0.1rem;
-      border-top-right-radius: 0.1rem;
-    }
-
-    @media (min-width: 992px) {
-      .rounded-tr-lg-0 {
-        border-top-right-radius: 1234;
+        if (data.msg === 'okay') {
+          sessionStorage.setItem('jwt', data.token);
+          router.push('/Nhome');
+        }
+      } catch (error) {
+        console.error('An error occurred during login:', error);
+        this.message = 'error';
       }
+    },
+  },
+};
+</script>
+<style scoped>
+.logo-image {
+  max-width: 100%;
+  height: auto;
+}
 
-      .rounded-bl-lg-5 {
-        border-bottom-left-radius: 0.5rem;
-      }
-    }
-  
+.theme-container {
+  background-color: rgb(255, 255, 255); /* light blue background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(41, 33, 33, 0.1);
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
 </style>
