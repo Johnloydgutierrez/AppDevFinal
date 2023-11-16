@@ -1,6 +1,7 @@
 <template>
   
   <div class="container">
+    
     <assign @data-saved="getInfo" />
     <div class="main-content">
       <div class="task-container">
@@ -29,7 +30,11 @@
             <td>{{ info.contact }}</td>
             <td>{{ info.costumer }}</td>
             
-            <td><button @click="deleteRecord(info.id)">Task Complete</button></td>
+            <td>
+  <v-btn @click="deleteRecord(info.id)" color="red" dark>
+    Task Complete
+  </v-btn>
+</td>
           </tr>
         </table>
       </div>
@@ -38,12 +43,16 @@
 </template>
 
 <script>
-import assign from '@/components/assign.vue';
+import assign from '../../components/assign.vue';
+
 import axios from 'axios';
 
 export default {
+ 
   components: {
     assign,
+   
+    
   },
   data() {
     return {
@@ -61,12 +70,18 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      
+      
+      
     },
   },
 };
 </script>
 
 <style>
+
+  
+ 
 .container {
   display: flex;
   justify-content: center;

@@ -5,8 +5,8 @@
     <h3>Add Task</h3>
     <form @submit.prevent="sve">
       <div class="mb-3">
-        <label for="staff" class="form-label">Staff</label>
-        <input type="text" class="form-control" placeholder="Staff" v-model="staff">
+        <label for="staff" class="form-label">Employee</label>
+        <input type="text" class="form-control" placeholder="Employee" v-model="staff">
       </div>
 
       <div class="mb-3">

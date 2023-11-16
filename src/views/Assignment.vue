@@ -39,6 +39,7 @@
 
 <script>
 import insert from '@/components/insert.vue';
+
 import axios from 'axios';
 
 export default {
