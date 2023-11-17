@@ -19,7 +19,7 @@
           <v-btn type="submit" block class="mt-3" color="orange">Login</v-btn>
           <router-link to="/signup" class="d-block mt-2">
   <v-btn color="pink" block>
-    Register
+    Don't have an account?
   </v-btn>
 </router-link>
 

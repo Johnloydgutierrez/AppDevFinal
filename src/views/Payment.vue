@@ -21,19 +21,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <router-link to="/Nhome" class="nav-link">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/Contact" class="nav-link">Contact</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/Signin" class="nav-link">Sign In</router-link>
-          </li>
-        </ul>
-      </div>
+     
     </div>
   </nav>
             <!-- Pricing section-->

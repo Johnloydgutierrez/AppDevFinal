@@ -21,7 +21,7 @@
           <v-btn type="submit" block class="mt-3 orange-button">Submit</v-btn>
           <router-link to="/" class="d-block mt-2">
   <v-btn color="black" block>
-    Login
+    Already have an account.
   </v-btn>
 </router-link>
 

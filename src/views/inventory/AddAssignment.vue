@@ -129,7 +129,7 @@ export default {
 }
 
 .custom-table tr:nth-child(even) {
-  background-color: #444; /* Darker gray background for even rows */
+  background-color: #bdbdbd; /* Darker gray background for even rows */
 }
 
 .custom-table tr:hover {
