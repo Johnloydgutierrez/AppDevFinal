@@ -216,7 +216,19 @@
   
   </select>
         </div>
-        
+
+        <div class="mb-3" id="app">
+  <form>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" v-model="quantity">
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" v-model="price">
+
+    <label for="total">Total Amount:</label>
+    <input type="text" id="total" :value="totalAmount" readonly>
+  </form>
+</div>
   
         <div class="mb-3">
           <label for="paymentt" class="form-label">Payment Type</label>
@@ -225,11 +237,6 @@
   <option value="paid" disabled selected>Paid</option>
   <option value="installment" disabled selected>Installment</option>
   </select>
-        </div>
-  
-        <div class="mb-3">
-          <label for="amount" class="form-label">Amount</label>
-          <input type="text" class="form-control" placeholder="Amount" v-model="amount">
         </div>
   
         <button type="submit" class="btn btn-danger">Invoice</button>
@@ -247,7 +254,7 @@
                                     <th scope="col">Invoice</th>
                                     <th scope="col">Customer</th>
                                     <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Payment Type</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
