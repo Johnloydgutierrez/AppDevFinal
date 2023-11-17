@@ -148,6 +148,7 @@
    
     </body>
 </template>
+
 <style>
 @import'../assets/asset/css/nfront.css';
 </style>
