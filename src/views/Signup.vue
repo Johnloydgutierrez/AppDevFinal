@@ -95,7 +95,7 @@
   
   /* Custom color for ray (outlined text field) */
   .theme--light.v-text-field--outlined:not(.v-text-field--dense):not(.v-text-field--textarea) {
-    border-color: green;
+    border-color: rgb(31, 202, 31);
   }
   
   /* Adjusted color for the button */

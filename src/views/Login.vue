@@ -87,7 +87,7 @@ export default {
 
 /* Custom color for ray (outlined text field) */
 .theme--light.v-text-field--outlined:not(.v-text-field--dense):not(.v-text-field--textarea) {
-  border-color: green;
+  border-color: rgb(45, 202, 45);
 }
 
 /* Adjusted color for the button */
