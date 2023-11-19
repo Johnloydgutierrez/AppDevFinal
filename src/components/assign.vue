@@ -6,27 +6,27 @@
     <form @submit.prevent="sve">
       <div class="mb-3">
         <label for="staff" class="form-label">Employee</label>
-        <input type="text" class="form-control" placeholder="Employee" v-model="staff">
+        <input type="text" class="form-control" placeholder="Employee" v-model="staff" required>
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <input type="text" class="form-control" placeholder="Description" v-model="description">
+        <input type="text" class="form-control" placeholder="Description" v-model="description" required>
       </div>
 
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
-        <input type="text" class="form-control" placeholder="Location" v-model="location">
+        <input type="text" class="form-control" placeholder="Location" v-model="location" required>
       </div>
 
       <div class="mb-3">
         <label for="contact" class="form-label">Contact</label>
-        <input type="text" class="form-control" placeholder="Contact" v-model="contact">
+        <input type="text" class="form-control" placeholder="Contact" v-model="contact" required>
       </div>
 
       <div class="mb-3">
         <label for="costumer" class="form-label">Costumer</label>
-        <input type="text" class="form-control" placeholder="Costumer" v-model="costumer">
+        <input type="text" class="form-control" placeholder="Costumer" v-model="costumer" required>
       </div>
 
       <button type="submit" class="btn btn-success">Save</button>

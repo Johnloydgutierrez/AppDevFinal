@@ -4,41 +4,41 @@
     <form @submit.prevent="save">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" placeholder="Name" v-model="name">
+        <input type="text" class="form-control" placeholder="Name" v-model="name" required>
       </div>
       
       <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
-        <input type="text" class="form-control" placeholder="Description" v-model="description">
+        <input type="text" class="form-control" placeholder="Description" v-model="description" required>
       </div>
 
             
       <div class="mb-3">
         <label for="Brand" class="form-label">Brand</label>
-        <input type="text" class="form-control" placeholder="Brand" v-model="Brand">
+        <input type="text" class="form-control" placeholder="Brand" v-model="Brand" required>
       </div>
       
             
       <div class="mb-3">
         <label for="Model" class="form-label">Model</label>
-        <input type="text" class="form-control" placeholder="Model" v-model="model">
+        <input type="text" class="form-control" placeholder="Model" v-model="model" required>
       </div>
 
             
       <div class="mb-3">
         <label for="Quantity" class="form-label">Quantity</label>
-        <input type="text" class="form-control" placeholder="Quantity" v-model="quantity">
+        <input type="text" class="form-control" placeholder="Quantity" v-model="quantity" required>
       </div>
 
       <div class="mb-3">
         <label for="image" class="form-label">Image</label>
-        <input type="file" id="image" class="form-control" @change="handleImageChange">
+        <input type="file" id="image" class="form-control" @change="handleImageChange" required>
       </div>
 
             
       <div class="mb-3">
         <label for="Price" class="form-label">Price</label>
-        <input type="text" class="form-control" placeholder="Price" v-model="price">
+        <input type="text" class="form-control" placeholder="Price" v-model="price" required>
       </div>
 
       <button type="submit" class="btn btn-danger">Save</button>
