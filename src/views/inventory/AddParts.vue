@@ -28,6 +28,7 @@
             <th>Brand</th>
             <th>Model</th>
             <th>Quantity</th>
+            <th>Image</th>
             <th>Price</th>
             
           </tr>
@@ -37,6 +38,7 @@
             <td>{{ info.brand }}</td>
             <td>{{ info.model }}</td>
             <td>{{ info.quantity }}</td>
+            <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
             
           </tr>

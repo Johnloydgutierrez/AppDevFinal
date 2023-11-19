@@ -139,13 +139,14 @@
 </div>
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-start rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Sales</h6>
-                        <div class="d-flex justify-content-center">
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Invoice</a>
+                    <div class="d-flex align-items-center mb-4">
+                        <h6 class="col mr-2">Recent Sales</h6>
+                        
+                        <div class="d-flex justify-content-center mr-2">
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Parts Invoice</a>
 <div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Invoice</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="bg-blue offcanvas-body">
@@ -153,56 +154,47 @@
       <form>
         <div class="mb-3">
           <label for="date" class="form-label">Date</label>
-          <input type="date" class="form-control" placeholder="Date" v-model="date">
+          <input type="date" class="form-control" placeholder="Date" v-model="date" required>
         </div>
   
         <div class="mb-3">
           <label for="invoice" class="form-label">Invoice</label>
-          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice">
+          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice" required>
         </div>
   
         <div class="mb-3">
           <label for="customer" class="form-label">Customer</label>
-          <input type="text" class="form-control" placeholder="Customer" v-model="customer">
+          <input type="text" class="form-control" placeholder="Customer" v-model="customer" required>
         </div>
 
         <div class="mb-3">
-          <label for="category" class="form-label">Category</label>
-          <select name="category" class="form-select" v-model="category">
-  <option value="" disabled selected>Select option</option>
+          <label for="selectedcategory" class="form-label">Category</label>
+          <select id="scategory" class="form-select" v-model="category" required>
+  <option value="Ebike">E-Bike Parts</option>
   
   </select>
         </div>
 
         <div class="mb-3">
           <label for="product" class="form-label">Product</label>
-          <select name="product" class="form-select" v-model="product">
+          <select name="product" class="form-select" v-model="product" required>
   <option value="" disabled selected>Select option</option>
-  
+  <option v-for="parts in ebikeparts" :key="parts.id" :value="parts.id">{{ parts.name }} - ${{ parts.price }}</option> //eparts
   </select>
         </div>
-
-        <div class="mb-3" id="app">
-  <form>
-    <label for="quantity">Quantity:</label>
-    <input type="text" class="form-control" placeholder="Quantity" id="quantity" v-model="quantity">
-
-    <label for="price">Price:</label>
-    <input type="text" class="form-control" placeholder="Price"  id="price" v-model="price" readonly>
-
-    <label for="total">Total Amount:</label>
-    <input type="text" class="form-control" placeholder="Total"  id="total" :value="totalAmount" readonly>
-  </form>
-</div>
-  
         <div class="mb-3">
-          <label for="paymentt" class="form-label">Payment Type</label>
-          <select name="paymentt" class="form-select" v-model="paymentt">
-  <option value="" disabled selected>Select option</option>
-  <option value="paid" >Paid</option>
-  <option value="installment" >Installment</option>
-  </select>
-        </div>
+  
+        <label for="quantityInput">Quantity:</label>
+    <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" />
+
+</div>
+
+<div class="mb-3">
+    <label for="totalAmount">Total Amount:</label>
+    <p class="form-control" id="totalAmount">₱{{ totalAmount }}</p>
+</div>
+
+  
   
         <button type="submit" class="btn btn-danger">Invoice</button>
       </form>
@@ -210,6 +202,67 @@
   </div>
 </div>
 </div>
+<div class="d-flex justify-content-center mr-2">
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
+<div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="bg-blue offcanvas-body">
+    <div class="text-light">
+      <form>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" class="form-control" placeholder="Date" v-model="date" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="invoice" class="form-label">Invoice</label>
+          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customer" class="form-label">Customer</label>
+          <input type="text" class="form-control" placeholder="Customer" v-model="customer" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="selectedcategory" class="form-label">Category</label>
+          <select id="scategory" class="form-select" v-model="category" required>
+  <option value="Ebike">E-Bike</option>
+  
+  </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="product" class="form-label">Product</label>
+          <select name="product" class="form-select" v-model="product" required>
+  <option value="" disabled selected>Select option</option>
+  <option v-for="product in products" :key="product.id" :value="product.id">{{ product.name }} - ${{ product.price }}</option> //elist
+  </select>
+        </div>
+        <div class="mb-3">
+  
+        <label for="quantityInput">Quantity:</label>
+    <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" />
+
+</div>
+
+<div class="mb-3">
+    <label for="totalAmount">Total Amount:</label>
+    <p class="form-control" id="totalAmount">₱{{ totalAmount }}</p>
+</div>
+
+  
+  
+        <button type="submit" class="btn btn-danger">Invoice</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -234,11 +287,101 @@
   </template>
   
   <script>
-  export default {
-    name: 'topbar',
-  };
-  </script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+        date:'',
+        invoice: '',
+        customer: '',
+        category: '',
+        products: [],
+        parts: [],
+        quantity: '',
+        totalAmount: ''
+    };
+  },
+  methods: {
+      async save() {
+        try {
+          const ins = await axios.post('save', {
+        date:this.date,
+        invoice:this.invoice,
+        customer:this.customer,
+        category:this.category,
+        products: this.products,
+        parts: this.parts,
+        quantity: this.quantity,
+        totalAmount: this.totalAmount
+           
+          });
   
+        this.date = '';
+        this.invoice= '';
+        this.customer= '';
+        this.category= '';
+        this.products= [];
+        this.parts= [];
+        this.quantity= '';
+        this.totalAmount= '';          
+  
+          this.$emit('data-saved');
+          this.getInfo(id);
+  
+          console.log(date, invoice, customer, category, products, quantity, totalAmount );
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    },
+
+  mounted() {
+    this.fetchParts();
+    this.fetchProducts();
+  },
+  methods: {
+    fetchProducts() {
+
+      axios.get('getprod')
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+         console.error('Error fetching products:', error);
+         });
+
+    },
+    fetchParts() {
+
+axios.get('getparts')
+  .then(response => {
+    this.parts = response.data;
+  })
+  .catch(error => {
+   console.error('Error fetching products:', error);
+   });
+
+},
+    updateTotal() {
+      if (this.selectedParts !== null) {
+        const selectedParts = this.parts.find(product => parts.id === this.selectedParts);
+        this.totalAmount = selectedParts.price * this.quantity;
+      } else {
+        this.totalAmount = 0;
+      }
+    },
+    updateTotal() {
+      if (this.selectedProduct !== null) {
+        const selectedProduct = this.products.find(product => product.id === this.selectedProduct);
+        this.totalAmount = selectedProduct.price * this.quantity;
+      } else {
+        this.totalAmount = 0;
+      }
+    }
+  }
+};
+</script>
+
   <style scoped>
   .container-fluid {
     background-color: rgb(0, 255, 221); /* Set your desired green color code */

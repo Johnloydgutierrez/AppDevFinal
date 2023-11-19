@@ -6,12 +6,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
 </svg>Back</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-        </ul>
+     
       </div>
     </div>
   </nav>
@@ -100,33 +97,15 @@
 
 <!-- Area Chart -->
 <div class="col-xl-8 col-lg-7">
-    <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-            <div class="chart-area">
-                <canvas id="myAreaChart"></canvas>
-            </div>
-        </div>
-    </div>
+    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Worldwide Sales</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <canvas id="worldwide-sales"></canvas>
+                        </div>
+                    </div>
 </div>
 
 <!-- Pie Chart -->
@@ -136,20 +115,6 @@
         <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -174,13 +139,14 @@
 </div>
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-start rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Sales</h6>
-                        <div class="d-flex justify-content-center">
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Invoice</a>
+                    <div class="d-flex align-items-center mb-4">
+                        <h6 class="col mr-2">Recent Sales</h6>
+                        
+                        <div class="d-flex justify-content-center mr-2">
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
 <div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Invoice</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="bg-blue offcanvas-body">
@@ -188,56 +154,47 @@
       <form>
         <div class="mb-3">
           <label for="date" class="form-label">Date</label>
-          <input type="date" class="form-control" placeholder="Date" v-model="date">
+          <input type="date" class="form-control" placeholder="Date" v-model="date" required>
         </div>
   
         <div class="mb-3">
           <label for="invoice" class="form-label">Invoice</label>
-          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice">
+          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice" required>
         </div>
   
         <div class="mb-3">
           <label for="customer" class="form-label">Customer</label>
-          <input type="text" class="form-control" placeholder="Customer" v-model="customer">
+          <input type="text" class="form-control" placeholder="Customer" v-model="customer" required>
         </div>
 
         <div class="mb-3">
-          <label for="category" class="form-label">Category</label>
-          <select name="category" class="form-select" v-model="category">
-  <option value="" disabled selected>Select option</option>
+          <label for="selectedcategory" class="form-label">Category</label>
+          <select id="scategory" class="form-select" v-model="category" required>
+  <option value="Ebike">E-Bike</option>
   
   </select>
         </div>
 
         <div class="mb-3">
           <label for="product" class="form-label">Product</label>
-          <select name="product" class="form-select" v-model="product">
+          <select name="product" class="form-select" v-model="product" required>
   <option value="" disabled selected>Select option</option>
-  
+  <option v-for="product in products" :key="product.id" :value="product.id">{{ product.name }} - ${{ product.price }}</option> //elist
   </select>
         </div>
-
-        <div class="mb-3" id="app">
-  <form>
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" v-model="quantity">
-
-    <label for="price">Price:</label>
-    <input type="number" id="price" v-model="price">
-
-    <label for="total">Total Amount:</label>
-    <input type="text" id="total" :value="totalAmount" readonly>
-  </form>
-</div>
-  
         <div class="mb-3">
-          <label for="paymentt" class="form-label">Payment Type</label>
-          <select name="paymentt" class="form-select" v-model="paymentt">
-  <option value="" disabled selected>Select option</option>
-  <option value="paid" disabled selected>Paid</option>
-  <option value="installment" disabled selected>Installment</option>
-  </select>
-        </div>
+  
+        <label for="quantityInput">Quantity:</label>
+    <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" />
+
+</div>
+
+<div class="mb-3">
+    <label for="totalAmount">Total Amount:</label>
+    <p class="form-control" id="totalAmount">₱{{ totalAmount }}</p>
+</div>
+
+  
   
         <button type="submit" class="btn btn-danger">Invoice</button>
       </form>
@@ -245,6 +202,67 @@
   </div>
 </div>
 </div>
+<div class="d-flex justify-content-center mr-2">
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
+<div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="bg-blue offcanvas-body">
+    <div class="text-light">
+      <form>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" class="form-control" placeholder="Date" v-model="date" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="invoice" class="form-label">Invoice</label>
+          <input type="text" class="form-control" placeholder="Invoice" v-model="invoice" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customer" class="form-label">Customer</label>
+          <input type="text" class="form-control" placeholder="Customer" v-model="customer" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="selectedcategory" class="form-label">Category</label>
+          <select id="scategory" class="form-select" v-model="category" required>
+  <option value="Ebike">E-Bike</option>
+  
+  </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="product" class="form-label">Product</label>
+          <select name="product" class="form-select" v-model="product" required>
+  <option value="" disabled selected>Select option</option>
+  <option v-for="product in products" :key="product.id" :value="product.id">{{ product.name }} - ${{ product.price }}</option> //elist
+  </select>
+        </div>
+        <div class="mb-3">
+  
+        <label for="quantityInput">Quantity:</label>
+    <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" />
+
+</div>
+
+<div class="mb-3">
+    <label for="totalAmount">Total Amount:</label>
+    <p class="form-control" id="totalAmount">₱{{ totalAmount }}</p>
+</div>
+
+  
+  
+        <button type="submit" class="btn btn-danger">Invoice</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -269,11 +287,49 @@
   </template>
   
   <script>
-  export default {
-    name: 'topbar',
-  };
-  </script>
-  
+export default {
+  data() {
+    return {
+      products: [],
+      selectedProduct: null,
+      quantity: 1,
+      totalAmount: 0
+    };
+  },
+  mounted() {
+    this.fetchProducts();
+  },
+  methods: {
+    fetchProducts() {
+      // Make an API request to fetch product data
+      // Example:
+      // axios.get('your-api-endpoint')
+      //   .then(response => {
+      //     this.products = response.data;
+      //   })
+      //   .catch(error => {
+      //     console.error('Error fetching products:', error);
+      //   });
+
+      // For simplicity, use mock data
+      this.products = [
+        { id: 1, name: 'Product 1', price: 10 },
+        { id: 2, name: 'Product 2', price: 15 },
+        { id: 3, name: 'Product 3', price: 20 }
+      ];
+    },
+    updateTotal() {
+      if (this.selectedProduct !== null) {
+        const selectedProduct = this.products.find(product => product.id === this.selectedProduct);
+        this.totalAmount = selectedProduct.price * this.quantity;
+      } else {
+        this.totalAmount = 0;
+      }
+    }
+  }
+};
+</script>
+
   <style scoped>
   .container-fluid {
     background-color: rgb(0, 255, 221); /* Set your desired green color code */
