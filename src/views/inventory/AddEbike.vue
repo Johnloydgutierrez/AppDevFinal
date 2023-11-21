@@ -84,9 +84,7 @@
                   <td>{{ ebike.price }}</td>
                   <td>{{ ebike.range }}</td>
                   <td>{{ ebike.motorPower }}</td>
-                  <td>
-                    <img :src="ebike.imageSrc" alt="E-Bike Image" style="max-width: 100px; max-height: 100px;" />
-                  </td>
+                 
                   <td>
                     <button class="btn btn-secondary" @click="editEbike(index)">Edit</button>
                     &nbsp;

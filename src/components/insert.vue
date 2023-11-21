@@ -15,7 +15,7 @@
             
       <div class="mb-3">
         <label for="Brand" class="form-label">Brand</label>
-        <input type="text" class="form-control" placeholder="Brand" v-model="Brand" required>
+        <input type="text" class="form-control" placeholder="Brand" v-model="brand" required>
       </div>
       
             

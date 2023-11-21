@@ -21,6 +21,10 @@
       <div class="parts-container">
         <br>
         <h2>E-Bike Parts Inventory</h2>
+
+          <button class="generate" @click="generatePDF">
+            Generate Report
+          </button>
         <table border="1" class="parts-table">
           <tr>
             <th>Name</th>
@@ -30,6 +34,7 @@
             <th>Quantity</th>
             <th>Image</th>
             <th>Price</th>
+            <th>action</th>         
             
           </tr>
           <tr v-for="info in info" :key="info.id">
@@ -40,6 +45,10 @@
             <td>{{ info.quantity }}</td>
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
+            <br>
+            <button @click="editItem(index)">Edit</button>
+          
+            
             
           </tr>
         </table>
@@ -73,10 +82,34 @@ export default {
       } catch (error) {
         console.error(error);
       }
-
-      
      this.getInfo();
     },
+    generatePDF() {
+        fetch("http://localhost:8080/generatePDF", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          if(!response.ok) {
+              throw new Error('HTTP error! Status: ${response.status}');
+          }
+          return response.blob();
+          })
+          .then((blob) => {
+            const url = windw.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "outputpdf");
+            document.body.appendChild(link);
+            link.click();
+      })
+      .catch((error) => {
+        console.log("Error generating or loading PDF: " + error);
+  });
+},
+
   },
 };
 </script>
