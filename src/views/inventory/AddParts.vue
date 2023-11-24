@@ -16,15 +16,14 @@
   </nav>
   <div class="floating-container">
       <div class="right-container">
-        <insert @data-saved="getInfo" />
+        <insert ref="insertForm" @data-saved="getInfo" />
       </div>
       <div class="parts-container">
         <br>
         <h2>E-Bike Parts Inventory</h2>
-
-          <button class="generate" @click="generatePDF">
-            Generate Report
-          </button>
+        <button class="btn btn-primary generate" @click="generatePDF">
+    Generate Report
+</button>
         <table border="1" class="parts-table">
           <tr>
             <th>Name</th>
@@ -46,8 +45,8 @@
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
             <br>
-            <button @click="editItem(index)">Edit</button>
-          
+            <button @click="editItem(info)">Edit</button>
+         
             
             
           </tr>
@@ -56,7 +55,6 @@
     </div>
   
 </template>
-
 <script>
 import insert from '@/components/insert.vue';
 import axios from 'axios';
@@ -74,7 +72,6 @@ export default {
     this.getInfo();
   },
   methods: {
-    
     async getInfo() {
       try {
         const inf = await axios.get('getData');
@@ -82,34 +79,39 @@ export default {
       } catch (error) {
         console.error(error);
       }
-     this.getInfo();
+    },
+    editItem(selectedInfo) {
+      // Access the form component using the ref
+      const formComponent = this.$refs.insertForm;
+
+      // Update the form fields with the selected item's data
+      formComponent.name = selectedInfo.name;
+      formComponent.description = selectedInfo.description;
+      formComponent.brand = selectedInfo.brand;
+      formComponent.model = selectedInfo.model;
+      formComponent.quantity = selectedInfo.quantity;
+      formComponent.image = selectedInfo.image;
+      formComponent.price = selectedInfo.price;
+
+      // Store the selected item's ID for updating it later
+      formComponent.itemId = selectedInfo.id;
+      formComponent.isEditing = true;
     },
     generatePDF() {
-        fetch("http://localhost:8080/generatePDF", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          if(!response.ok) {
-              throw new Error('HTTP error! Status: ${response.status}');
-          }
-          return response.blob();
-          })
-          .then((blob) => {
-            const url = windw.URL.createObjectURL(new Blob([blob]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "outputpdf");
-            document.body.appendChild(link);
-            link.click();
-      })
-      .catch((error) => {
-        console.log("Error generating or loading PDF: " + error);
-  });
-},
+      // Your existing code for generating PDF
+    },
+    async updateItem(editedItem) {
+      try {
+        // Make a PUT request to update the item in your database
+        await axios.put(`updateItem/${editedItem.id}`, editedItem);
 
+        // Update the local data with the edited item
+        const index = this.info.findIndex(item => item.id === editedItem.id);
+        this.$set(this.info, index, editedItem);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -163,12 +165,13 @@ export default {
 
 /* Added styling for the delete button */
 .parts-table button {
-  background-color: #3498db;
+  background-color: darkblue;
   color: #ffffff;
   border: none;
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 4px;
+  align-items: center;
 }
 
 .parts-table button:hover {

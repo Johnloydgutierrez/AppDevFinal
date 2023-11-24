@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar bg-green text-light p-4">
+  <div class="sidebar bg-blue text-light p-4">
     <h3>Add New Product</h3>
     <form @submit.prevent="save">
       <div class="mb-3">
@@ -40,8 +40,11 @@
         <label for="Price" class="form-label">Price</label>
         <input type="text" class="form-control" placeholder="Price" v-model="price" required>
       </div>
+      <div style="display: flex; justify-content: space-between;">
+    <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
+    <button type="submit" class="btn btn-danger">{{ isEditing ? 'Update' : 'Save' }}</button>
+</div>
 
-      <button type="submit" class="btn btn-danger">Save</button>
     </form>
   </div>
 </template>
@@ -59,47 +62,117 @@ export default {
       quantity: '',
       image: null,
       price: '',
+      itemId: null,
     };
   },
   methods: {
     handleImageChange(event) {
       this.image = event.target.files[0];
     },
+    
     async save() {
-      try {
-        const formData = new FormData();
-        formData.append('name', this.name);
-        formData.append('description', this.description);
-        formData.append('brand', this.brand);
-        formData.append('model', this.model);
-        formData.append('quantity', this.quantity);
-        formData.append('image', this.image);
-        formData.append('price', this.price);
+    try {
+        const formData = this.createFormData();
 
-        const response = await axios.post('save', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        // If itemId is present, it's an edit operation
+        if (this.itemId) {
+            const response = await axios.post(`updateItem/${this.itemId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
-        console.log(response.data);
+            console.log(response.data);
 
-        // ... handle other responses or actions as needed
-      } catch (error) {
+            // Reset the form fields
+            this.resetForm();
+            this.isEditing = false;
+
+            // Emit an event to notify the parent component about the data update
+            this.$emit('data-saved');
+
+            // ... handle other responses or actions as needed
+        } else {
+            // If itemId is not present, it's a save operation
+            const response = await axios.post('save', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log(response.data);
+
+            // Remove the current item from the table
+            if (this.itemId) {
+                this.info = this.info.filter(item => item.id !== this.itemId);
+            }
+
+            // Reset itemId after saving changes
+            this.itemId = null  ;
+
+            // Reset the form fields
+            this.resetForm();
+            this.isEditing = false;
+
+            // Emit an event to notify the parent component about the data update
+            this.$emit('data-saved');
+
+            // ... handle other responses or actions as needed
+        }
+    } catch (error) {
         console.error(error);
-      }
+    }
+},
+
+cancelEdit() {
+      this.resetForm();
+      this.isEditing = false;
+    },
+
+
+    editItem(info) {
+      // Clear the form fields and reset editing status
+      this.resetForm();
+      this.isEditing = false;
+    },
+    createFormData() {
+      const formData = new FormData();
+      formData.append('name', this.name);
+      formData.append('description', this.description);
+      formData.append('brand', this.brand);
+      formData.append('model', this.model);
+      formData.append('quantity', this.quantity);
+      formData.append('image', this.image);
+      formData.append('price', this.price);
+
+      return formData;
+    },
+    resetForm() {
+      // Reset your form fields
+      this.name = '';
+      this.description = '';
+      this.brand = '';
+      this.model = '';
+      this.quantity = '';
+      this.image = null;
+      this.price = '';
     },
   },
 };
 </script>
-
   
   <style scoped>
   
   .sidebar {
-    height: 100vh;
+    height: 100%;
   }
   
+  @media (min-width: 768px) {
+    /* Adjust the height for larger screens */
+    .sidebar {
+      height: 80vh;
+    }
+  }
   .sidebar h3 {
     margin-bottom: 20px;
   }

@@ -1,17 +1,22 @@
 <template>
-  
+    <router-link to="/Admin" class="navbar-brand bg-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+  <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+</svg>Back</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
   <div class="container">
-    
     <assign @data-saved="getInfo" />
     <div class="main-content">
       <div class="task-container">
-        
-         <br>         
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                <br>         
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
+          <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+          <br>
+        </a>
+        <br> <!-- Add a line break for separation -->
         <table class="task-table custom-table">
-          
           <tr>
             <th>Employee</th>
             <th>Description</th>
@@ -26,18 +31,18 @@
             <td>{{ info.location }}</td>
             <td>{{ info.contact }}</td>
             <td>{{ info.costumer }}</td>
-            
             <td>
-  <v-btn @click="deleteRecord(info.id)" color="red" dark>
-    Task Complete
-  </v-btn>
-</td>
+              <v-btn @click="deleteRecord(info.id)" color="red" dark>
+                Task Complete
+              </v-btn>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import assign from '../../components/assign.vue';
@@ -66,10 +71,7 @@ export default {
         this.info = inf.data;
       } catch (error) {
         console.log(error);
-      }
-      
-      
-      
+      }  
     },
   },
 };
@@ -121,8 +123,8 @@ export default {
 }
 
 .custom-table th {
-  background-color: #555; /* Dark gray header background color */
-  color: #fff; /* White text color */
+  background-color: darkcyan; /* Dark gray header background color */
+  color: black; /* White text color */
 }
 
 .custom-table tr:nth-child(even) {
@@ -130,7 +132,7 @@ export default {
 }
 
 .custom-table tr:hover {
-  background-color: #333; /* Darker gray background on hover */
+  background-color: lightseagreen; /* Darker gray background on hover */
 }
 </style>
 

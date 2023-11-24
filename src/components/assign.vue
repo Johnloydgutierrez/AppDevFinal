@@ -1,6 +1,6 @@
 <template>
   
-  <div class="sidebar bg-green text-light p-4">
+  <div class="sidebar  text-light p-4">
     
     <h3>Add Task</h3>
     <form @submit.prevent="sve">
@@ -30,6 +30,7 @@
       </div>
 
       <button type="submit" class="btn btn-success">Save</button>
+      
     </form>
   </div>
 </template>
@@ -85,7 +86,7 @@ export default {
 
 <style scoped>
 .sidebar {
-  background-color: #4CAF50;
+  background-color: rgb(3, 187, 166);
   border-radius: 15px;
   overflow: hidden;
   width: 300px;

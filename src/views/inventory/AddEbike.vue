@@ -84,7 +84,7 @@
                   <td>{{ ebike.price }}</td>
                   <td>{{ ebike.range }}</td>
                   <td>{{ ebike.motorPower }}</td>
-                 
+                  <td>{{ ebike.image }}</td>
                   <td>
                     <button class="btn btn-secondary" @click="editEbike(index)">Edit</button>
                     &nbsp;
@@ -165,5 +165,5 @@
   
   <style scoped>
   /* Add your component-specific styles here */
-  </style>
   
+  </style>

@@ -18,9 +18,9 @@
   
           <div v-if="message === 'passwordMismatch'" class="error-message">Passwords do not match</div>
   
-          <v-btn type="submit" block class="mt-3 orange-button">Submit</v-btn>
+          <v-btn type="submit" block class="mt-3" color="green">Submit</v-btn>
           <router-link to="/" class="d-block mt-2">
-  <v-btn color="black" block>
+  <v-btn color="red" block>
     Already have an account.
   </v-btn>
 </router-link>
@@ -105,7 +105,7 @@
   }
 
   .background-container {
-  background-color: rgb(32, 139, 37); /* Blue background color, change to your preferred color */
+  background-color: rgb(4, 4, 135); /* Blue background color, change to your preferred color */
   height: 100vh; /* Full height of the viewport, adjust as needed */
   display: flex;
   align-items: center;
