@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
       <router-link to="/Admin" class="navbar-brand bg-dark">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
@@ -26,6 +26,7 @@
 </button>
         <table border="1" class="parts-table">
           <tr>
+
             <th>Name</th>
             <th>Description</th>
             <th>Brand</th>
@@ -34,6 +35,7 @@
             <th>Image</th>
             <th>Price</th>
             <th>action</th>         
+            <th style="display: none">ID</th>
             
           </tr>
           <tr v-for="info in info" :key="info.id">
@@ -44,6 +46,7 @@
             <td>{{ info.quantity }}</td>
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
+            <td style="display: none">{{ info.id }}</td>
             <br>
             <button @click="editItem(info)">Edit</button>
          
@@ -85,6 +88,9 @@ export default {
       const formComponent = this.$refs.insertForm;
 
       // Update the form fields with the selected item's data
+      
+      formComponent.id = selectedInfo.ID;
+      formComponent.sid = selectedInfo.ID;
       formComponent.name = selectedInfo.name;
       formComponent.description = selectedInfo.description;
       formComponent.brand = selectedInfo.brand;

@@ -2,13 +2,17 @@
   <div class="sidebar bg-blue text-light p-4">
     <h3>Add New Product</h3>
     <form @submit.prevent="save">
+      
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
+        <input type="text" v-model="itemId">
         <input type="text" class="form-control" placeholder="Name" v-model="name" required>
       </div>
       
       <div class="mb-3">
+        
         <label for="Description" class="form-label">Description</label>
+        <input type="text" v-model="sid" placeholder="id">
         <input type="text" class="form-control" placeholder="Description" v-model="description" required>
       </div>
 
@@ -42,7 +46,9 @@
       </div>
       <div style="display: flex; justify-content: space-between;">
     <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
-    <button type="submit" class="btn btn-danger">{{ isEditing ? 'Update' : 'Save' }}</button>
+    <!-- <button type="submit" @submit.prevent="updateItem" class="btn btn-danger">{{ isEditing ? 'Update' : 'Save' }}</button> -->
+    <button v-if="isEditing" type="submit" @click.prevent="updateItem" class="btn btn-danger">Update</button>
+  <button v-else type="submit" @click.prevent="save" class="btn btn-success">Save</button>
 </div>
 
     </form>
@@ -63,6 +69,7 @@ export default {
       image: null,
       price: '',
       itemId: null,
+      sid: '',
     };
   },
   methods: {
@@ -74,51 +81,67 @@ export default {
     try {
         const formData = this.createFormData();
 
-        // If itemId is present, it's an edit operation
+        // Save operation
+        const response = await axios.post('save', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response.data);
+
+        // Remove the current item from the table
         if (this.itemId) {
-            const response = await axios.post(`updateItem/${this.itemId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            console.log(response.data);
-
-            // Reset the form fields
-            this.resetForm();
-            this.isEditing = false;
-
-            // Emit an event to notify the parent component about the data update
-            this.$emit('data-saved');
-
-            // ... handle other responses or actions as needed
-        } else {
-            // If itemId is not present, it's a save operation
-            const response = await axios.post('save', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            console.log(response.data);
-
-            // Remove the current item from the table
-            if (this.itemId) {
-                this.info = this.info.filter(item => item.id !== this.itemId);
-            }
-
-            // Reset itemId after saving changes
-            this.itemId = null  ;
-
-            // Reset the form fields
-            this.resetForm();
-            this.isEditing = false;
-
-            // Emit an event to notify the parent component about the data update
-            this.$emit('data-saved');
-
-            // ... handle other responses or actions as needed
+            this.info = this.info.filter(item => item.id !== this.itemId);
         }
+
+        // Reset itemId after saving changes
+        this.itemId = null;
+
+        // Reset the form fields
+        this.resetForm();
+        this.isEditing = false;
+
+        // Emit an event to notify the parent component about the data update
+        this.$emit('data-saved');
+
+        // ... handle other responses or actions as needed
+    } catch (error) {
+        console.error(error);
+    }
+},
+
+async updateItem() {
+    try {
+      // console.log(this.itemId);
+        const formData = this.createFormData();
+        console.log(formData);
+        // Update operation
+        const response = await axios.post(`updateItem/${this.sid}`,{
+          'name': this.name,
+          'description': this.description,
+          'brand': this.brand,
+          'model': this.model,
+          'quantity': this.quantity,
+          'image': this.image,
+          'price': this.price,
+        },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response.data);
+
+        // Reset the form fields
+        this.resetForm();
+        this.isEditing = false;
+
+        // Emit an event to notify the parent component about the data update
+        this.$emit('update');
+
+        // ... handle other responses or actions as needed
     } catch (error) {
         console.error(error);
     }
@@ -137,6 +160,7 @@ cancelEdit() {
     },
     createFormData() {
       const formData = new FormData();
+      // formData.append('id', this.id);
       formData.append('name', this.name);
       formData.append('description', this.description);
       formData.append('brand', this.brand);
