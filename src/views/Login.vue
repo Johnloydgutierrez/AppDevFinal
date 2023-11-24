@@ -1,35 +1,44 @@
 <template>
   <div class="background-container">
-    <!-- Your content goes here -->
-    
-      <!-- Your container content -->
-    
-  
-  <div class="container">
-  <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
-    <div class="v-container theme-container">
-      <img src="https://prof562e926-pic5.ysjianzhan.cn/upload/3002.png" alt="Logo" class="logo-image mb-4">
-      <v-sheet width="300" class="mx-auto">
-        <v-form @submit.prevent="login">
-          <div v-if="message === 'error'" class="error-message">Invalid response</div>
+    <div class="container">
+      <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+        <div class="v-container theme-container">
+          <img src="https://prof562e926-pic5.ysjianzhan.cn/upload/3002.png" alt="Logo" class="logo-image mb-4">
+          <v-sheet width="300" class="mx-auto">
+            <v-form @submit.prevent="login">
+              <div v-if="message === 'error'" class="error-message">Invalid response</div>
 
-          <v-text-field v-model="username" label="Username" outlined :color="rayColor"></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password" outlined :color="rayColor"></v-text-field>
+              <v-text-field
+                v-model="username"
+                label="Username"
+                outlined
+                :color="black"
+              ></v-text-field>
 
-          <v-btn type="submit" block class="mt-3" color="orange">Login</v-btn>
-          <router-link to="/signup" class="d-block mt-2">
-  <v-btn color="pink" block>
-    Don't have an account?
-  </v-btn>
-</router-link>
+              <v-text-field
+                v-model="password"
+                label="Password"
+                :type="showPassword ? 'text' : 'password'"
+                outlined
+                :color="black"
+              >
+                <template v-slot:prepend-inner>
+                  <v-icon @click="togglePasswordVisibility">{{ showPassword ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
+                </template>
+              </v-text-field>
 
-
-        </v-form>
-      </v-sheet>
+              <v-btn type="submit" block class="mt-3" color="green">Login</v-btn>
+              <router-link to="/signup" class="d-block mt-2">
+                <v-btn color="red" block>
+                  Don't have an account?
+                </v-btn>
+              </router-link>
+            </v-form>
+          </v-sheet>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 </template>
 
 <script>
@@ -43,6 +52,7 @@ export default {
       password: '',
       message: '',
       rayColor: 'green',
+      showPassword: false,
     };
   },
   methods: {
@@ -64,21 +74,25 @@ export default {
         this.message = 'error';
       }
     },
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
   },
 };
 </script>
 
 <style scoped>
+/* Add your component-specific styles here */
 .logo-image {
   max-width: 100%;
   height: auto;
 }
 
 .theme-container {
-  background-color: rgb(255, 255, 255); /* White background */
+  background-color: rgb(255, 255, 255);
   padding: 20px;
-  border-radius: 15px; /* Increased border radius for curved edges */
-  box-shadow: 0 0 20px rgba(41, 33, 33, 0.2); /* Adjusted box shadow */
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(41, 33, 33, 0.2);
 }
 
 .error-message {
@@ -91,24 +105,22 @@ export default {
   border-color: rgb(45, 202, 45);
 }
 
-/* Adjusted color for the button */
 .v-btn--contained.orange {
   color: #fff;
   background-color: orange;
 }
+
 .background-container {
-  background-color: rgb(32, 139, 37); /* Blue background color, change to your preferred color */
-  height: 100vh; /* Full height of the viewport, adjust as needed */
+  background-color: rgb(4, 4, 135);
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .container {
-  /* Your container styles go here */
   padding: 20px;
   border-radius: 10px;
-  /* Other styles */
 }
-
 </style>
+
