@@ -27,18 +27,20 @@
                 </template>
               </v-text-field>
 
-              <v-btn type="submit" block class="mt-3" color="green">Login</v-btn>
-              <router-link to="/signup" class="d-block mt-2">
-                <v-btn color="red" block>
-                  Don't have an account?
-                </v-btn>
-              </router-link>
-            </v-form>
-          </v-sheet>
-        </div>
-      </div>
+          <v-btn type="submit" block class="mt-3" color="orange">Login</v-btn>
+          <router-link to="/signup" class="d-block mt-2">
+  <v-btn color="pink" block>
+    Don't have an account?
+  </v-btn>
+</router-link>
+
+
+        </v-form>
+      </v-sheet>
     </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -57,6 +59,7 @@ export default {
   },
   methods: {
     async login() {
+      // console.log('okay naman')
       try {
         const { data } = await axios.post('login', {
           username: this.username,

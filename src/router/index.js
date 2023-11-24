@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/Nhome',
     component: NhomePage,
-    // meta :{requiresAuth: true}
+    meta:{requiredAuth: true}
   },
   
   {
@@ -16,7 +16,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Contact.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Contact.vue'),
+    meta:{requiredAuth: true}
   },
   
   {
@@ -25,7 +26,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue') 
+  
   },
   {
     path: '/Payment',
@@ -33,7 +35,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Payment.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Payment.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/Admin',
@@ -41,7 +44,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue'),
+    meta:{requiredAuth: true},
   },
   {
     path: '/Signup',
@@ -57,7 +61,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ListEbike.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListEbike.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/Assignment',
@@ -65,7 +70,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Assignment.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Assignment.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/parts',
@@ -73,7 +79,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/parts.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/parts.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/AddEbike',
@@ -81,7 +88,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddEbike.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddEbike.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/AddAssignment',
@@ -89,7 +97,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddAssignment.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddAssignment.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/AddParts',
@@ -97,7 +106,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddParts.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/inventory/AddParts.vue'),
+    meta:{requiredAuth: true}
   },
   {
     path: '/Sales',
@@ -105,17 +115,32 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/sales/Sales.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/sales/Sales.vue'),
+    meta:{requiredAuth: true}
   },
   
 
 ]
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-// router.beforeEach((to,from,next)=>{
-// const isLoggedin = checkUserLogin();
-// });
+
+router.beforeEach((to, from, next) => {
+  const isLoggedin = checkUserLogin();
+ if (to.matched.some((record) => record.meta.requiredAuth)) {
+  if (!isLoggedin) {
+    next('/');
+  } else {
+    next();
+  }
+ }else{
+  next();
+ }
+});
+
+ function checkUserLogin(){
+  const userToken = sessionStorage.getItem("jwt");
+  return !!userToken;
+}
 export default router
