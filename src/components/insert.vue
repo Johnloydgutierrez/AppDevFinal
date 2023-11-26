@@ -12,6 +12,7 @@
       <div class="mb-3">
         
         <label for="Description" class="form-label">Description</label>
+        <input type="text" v-model="sid" placeholder="id">
         <input type="text" class="form-control" placeholder="Description" v-model="description" required>
       </div>
 
@@ -44,9 +45,8 @@
         <input type="text" class="form-control" placeholder="Price" v-model="price" required>
       </div>
       <div style="display: flex; justify-content: space-between;">
-  <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
-  <button v-if="isEditing" type="submit" @click.prevent="updateItem" class="btn btn-danger" style="margin-right: 150px;">Update</button>
-  <button v-else type="submit" @click.prevent="save" class="btn btn-success">Save</button>
+    <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
+    <button type="submit" class="btn btn-danger">{{ isEditing ? 'Update' : 'Save' }}</button>
 </div>
 
     </form>
@@ -103,43 +103,8 @@ export default {
         // Emit an event to notify the parent component about the data update
         this.$emit('data-saved');
 
-        // ... handle other responses or actions as needed
-    } catch (error) {
-        console.error(error);
-    }
-},
-
-async updateItem() {
-    try {
-      // console.log(this.itemId);
-        const formData = this.createFormData();
-        console.log(formData);
-        // Update operation
-        const response = await axios.post(`updateItem/${this.sid}`,{
-          'name': this.name,
-          'description': this.description,
-          'brand': this.brand,
-          'model': this.model,
-          'quantity': this.quantity,
-          'image': this.image,
-          'price': this.price,
-        },
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
-        console.log(response.data);
-
-        // Reset the form fields
-        this.resetForm();
-        this.isEditing = false;
-
-        // Emit an event to notify the parent component about the data update
-        this.$emit('data-save');
-
-        // ... handle other responses or actions as needed
+            // ... handle other responses or actions as needed
+        }
     } catch (error) {
         console.error(error);
     }

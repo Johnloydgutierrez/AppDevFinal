@@ -47,9 +47,8 @@
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
             <td style="display: none">{{ info.id }}</td>
-            <td class="action-cell">
+            <br>
             <button @click="editItem(info)">Edit</button>
-          </td>
           </tr>
         </table>
       </div>
