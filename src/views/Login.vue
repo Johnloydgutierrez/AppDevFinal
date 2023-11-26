@@ -27,9 +27,9 @@
                 </template>
               </v-text-field>
 
-          <v-btn type="submit" block class="mt-3" color="orange">Login</v-btn>
+          <v-btn type="submit" block class="mt-3" color="success">Login</v-btn>
           <router-link to="/signup" class="d-block mt-2">
-  <v-btn color="pink" block>
+  <v-btn color="red" block>
     Don't have an account?
   </v-btn>
 </router-link>

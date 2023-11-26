@@ -47,12 +47,13 @@
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
             <td style="display: none">{{ info.id }}</td>
-            <br>
-            <button @click="editItem(info)">Edit</button>
-          </tr>
-        </table>
-      </div>
-    </div>
+            <td>
+          <button @click="editItem(info)" class="edit-btn">Edit</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
   
 </template>
 <script>

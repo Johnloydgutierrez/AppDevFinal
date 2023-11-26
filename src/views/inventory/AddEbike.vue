@@ -86,9 +86,8 @@
                   <td>{{ ebike.motorPower }}</td>
                   <td>{{ ebike.image }}</td>
                   <td>
-                    <button class="btn btn-secondary" @click="editEbike(index)">Edit</button>
-                    &nbsp;
-                    <button class="btn btn-danger" @click="deleteEbike(index)">Delete</button>
+                    <br>
+                       <button @click="editItem(info)">Edit</button>
                   </td>
                 </template>
               </tr>
