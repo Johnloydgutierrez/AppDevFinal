@@ -57,7 +57,7 @@
                 <option value="Category C">Category C</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary">{{ isEditing ? 'Save' : 'Add' }}</button>
+            <button type="submit" class="btn btn-success">Save</button>
           </form>
         </div>
         <div>

@@ -11,10 +11,11 @@
     <assign @data-saved="getInfo" />
     <div class="main-content">
       <div class="task-container">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
-          <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-          <br>
-        </a>
+        <h2>Add Assignmen</h2>
+        <button class="btn btn-primary generate" @click="generatePDF">
+    Generate Report
+</button>
+    
         <br> <!-- Add a line break for separation -->
         <table class="task-table custom-table">
           <tr>
@@ -64,7 +65,13 @@ export default {
   created() {
     this.getInfo();
   },
-  methods: {
+    methods: {
+    async deleteRecord(recordId) {
+      await axios.post("del", {
+        id: recordId,
+      });
+      this.getInfo();
+    },
     async getInfo() {
       try {
         const inf = await axios.get('Assign');
@@ -86,6 +93,18 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.task-container {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.generate {
+  margin-bottom: 20px;
 }
 
 .content-container {

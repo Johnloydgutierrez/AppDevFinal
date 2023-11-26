@@ -58,9 +58,6 @@ export default {
           location: this.location,
       contact: this.contact,
       costumer:this.costumer,
-          
-
-
       
         });
       this.staff ='';
@@ -75,6 +72,7 @@ export default {
 
         
       } catch (error) {
+        console.log(error);
         
       }
      

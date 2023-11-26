@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
       <router-link to="/Admin" class="navbar-brand bg-dark">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
@@ -26,6 +26,7 @@
 </button>
         <table border="1" class="parts-table">
           <tr>
+
             <th>Name</th>
             <th>Description</th>
             <th>Brand</th>
@@ -34,6 +35,7 @@
             <th>Image</th>
             <th>Price</th>
             <th>action</th>         
+            <th style="display: none">ID</th>
             
           </tr>
           <tr v-for="info in info" :key="info.id">
@@ -44,11 +46,10 @@
             <td>{{ info.quantity }}</td>
             <td>{{ info.image }}</td>
             <td>{{ info.price }}</td>
-            <br>
+            <td style="display: none">{{ info.id }}</td>
+            <td class="action-cell">
             <button @click="editItem(info)">Edit</button>
-         
-            
-            
+          </td>
           </tr>
         </table>
       </div>
@@ -85,6 +86,9 @@ export default {
       const formComponent = this.$refs.insertForm;
 
       // Update the form fields with the selected item's data
+      
+      formComponent.id = selectedInfo.ID;
+      formComponent.sid = selectedInfo.ID;
       formComponent.name = selectedInfo.name;
       formComponent.description = selectedInfo.description;
       formComponent.brand = selectedInfo.brand;
@@ -115,14 +119,14 @@ export default {
   },
 };
 </script>
-<style>
+
+<style scoped>
 .floating-container  {
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  margin: 20px auto;
+  width: 100%;
+  margin: 0;
   background-color: darkcyan;
-  
 }
 
 .right-container {
@@ -139,24 +143,41 @@ export default {
   width: 97%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: 100;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px #0000001a;
 }
 
 .parts-table th,
 .parts-table td {
-  border: 1px solid #000000;
-  padding: 20px;
-  text-align: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-weight: 500;
-
+  padding: 15px;
+  color: #fff;
+  border: 1px solid #01030f; /* Add border styling */
 }
 
 .parts-table th {
-  background-color: #f2f2f2;
+  background-color: #55608f;
 }
 
-.parts-table tr:nth-child(even) {
-  background-color: #ffffff;
+.parts-table tr:hover {
+  background-color: #ffffff4d;
+}
+
+.parts-table tbody td {
+  position: relative;
+}
+
+.parts-table tbody tr:hover::before {
+  content: "";
+  position: absolute;
+  background-color: #ffffff33;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 .right-container h2 {
@@ -177,6 +198,6 @@ export default {
 .parts-table button:hover {
   background-color: #2980b9;
 }
-
 </style>
+
 
