@@ -13,7 +13,7 @@
     </div>
   </nav>
   <div class="floating-container">
-    <h2>eBike Parts Information</h2>
+    <h2>EBike Parts Stocks Information</h2>
 
     <table class="parts-table">
       <tr>
