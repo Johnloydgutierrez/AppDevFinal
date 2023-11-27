@@ -1,15 +1,18 @@
 <template>
-    <router-link to="/Admin" class="navbar-brand bg-dark">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+  <div class="top-bar">
+  <a href="/Admin" >
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
-</svg>Back</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+</svg>
+  </a>
+</div>
       
   <div class="container">
+    
     <assign @data-saved="getInfo" />
     <div class="main-content">
+      
       <div class="task-container">
         <h2>Add Assignmen</h2>
         <button class="btn btn-primary generate" @click="generatePDF">
@@ -81,13 +84,30 @@ export default {
       }  
     },
   },
+   
 };
 </script>
 
 <style>
-
-  
  
+
+ .top-bar {
+      background-color: #333; /* Set your desired background color */
+      color: #fff; /* Set your desired text color */
+      padding: 10px; /* Adjust padding as needed */
+      text-align: left; /* Center the content */
+    }
+
+    .container {
+      color: inherit; /* Inherit the text color from the parent */
+      text-decoration: none; /* Remove the default underline on links */
+      display: flex;
+      align-items: center;
+    }
+
+    .container svg {
+      margin-right: 5px; /* Add spacing between the icon and text */
+    }
 .container {
   display: flex;
   justify-content: center;
