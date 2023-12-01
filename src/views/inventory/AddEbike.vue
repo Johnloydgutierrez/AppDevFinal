@@ -1,178 +1,238 @@
 <template>
-  <div class="top-bar">
-  <a href="/Admin" >
-
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+      <router-link to="/Admin" class="navbar-brand bg-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
-</svg>
-  </a>
-</div>
-      
-  <div class="container">
-    
-    <categ @data-saved="getInfo" />
-    <div class="main-content">
-      
-      <div class="task-container">
-        <h2>Add Product</h2>
+</svg>Back</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="floating-container">
+      <div class="right-container">
+        <categ ref="insertForm" @data-saved="getInfo" />
+      </div>
+      <div class="parts-container">
+        <br>
+        <h2>E-Bike Parts Inventory</h2>
         <button class="btn btn-primary generate" @click="generatePDF">
     Generate Report
 </button>
-    
-        <br> <!-- Add a line break for separation -->
-        <table class="task-table custom-table">
-          <tr>
-            <th>Product</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
-   
-            <th>Action</th>
-          </tr>
-          <tr v-for="info in info" :key="info.id">
-            <td>{{ info.productName }}</td>
-            <td>{{ info.description }}</td>
-            <td>{{ info.category }}</td>
-            <td>{{ info.price }}</td>
-          
-            <td>
-              <v-btn @click="deleteRecord(info.id)" color="red" dark>
-                Task Complete
-              </v-btn>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
+<table border="1" class="parts-table">
+  <tr>
+    <th>productName</th>
+    <th>description</th>
+    <th>category</th>
+    <th>categImage</th>
+    <th>price</th>
+    <th>action</th>
+    <th style="display: none">ID</th>
+  </tr>
+  <tr v-for="info in ebikelist" :key="info.id">
+    <td>{{ info.productName }}</td>
+    <td>{{ info.description }}</td>
+    <td>{{ info.category }}</td>
+    <td v-if="info.categImage">
+      <img
+        :src="info.categImage"
+        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
+        @error="handlecategImageError"
+      />
+    </td>
+    <td>{{ info.price }}</td>
+    <td style="display: none">{{ info.id }}</td>
+    <td>
+      <button @click="editItem(info)" class="edit-btn">Edit</button>
+    </td>
+  </tr>
+</table>
+
   </div>
+</div>
+  
 </template>
-
-
 <script>
-import categ from '../../components/categ.vue';
-
+import categ from '@/components/categ.vue';
 import axios from 'axios';
 
 export default {
- name:'AddEbike',
   components: {
     categ,
-   
-    
   },
   data() {
     return {
-      info: [],
-
-    };
+    ebikelist: [], // Corrected property productName
+  };
   },
   created() {
     this.getInfo();
   },
-    methods: {
-    async deleteRecord(recordId) {
-      await axios.post("del", {
-        id: recordId,
-      });
-      this.getInfo();
-    },
+  methods: {
     async getInfo() {
       try {
-        const inf = await axios.get('categ');
-        this.info = inf.data;
+        const inf = await axios.get('/ebikecategGetData');
+        this.ebikelist = inf.data;
       } catch (error) {
-        console.log(error);
-      }  
+        console.error(error);
+      }
+    },
+    editItem(selectedInfo) {
+      // Access the form component using the ref
+      const formComponent = this.$refs.insertForm;
+
+      // Update the form fields with the selected item's data
+      
+      formComponent.id = selectedInfo.ID;
+      formComponent.sid = selectedInfo.ID;
+      formComponent.productName = selectedInfo.productName;
+     
+      formComponent.category = selectedInfo.category;
+      formComponent.categImage = selectedInfo.categImage;
+      formComponent.price = selectedInfo.price;
+
+      // Store the selected item's ID for updating it later
+      formComponent.itemId = selectedInfo.id;
+      formComponent.isEditing = true;
+    },
+    generatePDF() {
+      // Your existing code for generating PDF
+    },
+    async updateItem(editedItem) {
+      try {
+        // Make a PUT request to update the item in your database
+        await axios.put(`updateItem/${editedItem.id}`, editedItem);
+
+        // Update the local data with the edited item
+        const index = this.info.findIndex(item => item.id === editedItem.id);
+        this.$set(this.info, index, editedItem);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
-   
 };
 </script>
 
-<style>
- 
+<style scoped>
 
- .top-bar {
-      background-color: #333; /* Set your desired background color */
-      color: #fff; /* Set your desired text color */
-      padding: 10px; /* Adjust padding as needed */
-      text-align: left; /* Center the content */
-    }
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 14px;
+  }
 
-    .container {
-      color: inherit; /* Inherit the text color from the parent */
-      text-decoration: none; /* Remove the default underline on links */
-      display: flex;
-      align-items: center;
-    }
+  .navbar-toggler {
+    font-size: 12px;
+  }
 
-    .container svg {
-      margin-right: 5px; /* Add spacing between the icon and text */
-    }
-.container {
+  .navbar-nav {
+    margin-top: 10px;
+  }
+
+  .floating-container {
+    flex-direction: column;
+  }
+
+  .right-container,
+  .parts-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .generate {
+    width: 100%;
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  .btn-warning {
+    width: 100%;
+  }
+}
+.floating-container  {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.task-container {
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 20px;
-}
-
-.generate {
-  margin-bottom: 20px;
-}
-
-.content-container {
-  display: flex;
-}
-
-.sidebar {
-  width: 300px;
-  background-color: #333; /* Dark gray background color */
-  border-radius: 10px;
-  overflow: hidden;
-  margin-right: 20px;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-}
-
-
-
-.custom-table {
-  border-collapse: collapse;
+  justify-content: space-between;
   width: 100%;
-  border: 2px solid #555; /* Border color */
-  border-radius: 10px;
-  overflow: hidden;
+  margin: 0;
+  background-color: darkcyan;
 }
 
-.custom-table th,
-.custom-table td {
-  border: 1px solid #555;
-  padding: 15px; /* Adjusted padding */
+.right-container {
+  max-width: 500px;
+}
+
+.parts-container , h2{
+  flex-grow: 1;
+  padding-left: 20px;
   text-align: center;
 }
 
-.custom-table th {
-  background-color: darkcyan; /* Dark gray header background color */
-  color: black; /* White text color */
+.parts-table {
+  width: 97%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: 100;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px #0000001a;
 }
 
-.custom-table tr:nth-child(even) {
-  background-color: #bdbdbd; /* Darker gray background for even rows */
+.parts-table th,
+.parts-table td {
+  padding: 15px;
+  color: #fff;
+  border: 1px solid #01030f; /* Add border styling */
 }
 
-.custom-table tr:hover {
-  background-color: lightseagreen; /* Darker gray background on hover */
+.parts-table th {
+  background-color: #55608f;
+}
+
+.parts-table tr:hover {
+  background-color: #ffffff4d;
+}
+
+.parts-table tbody td {
+  position: relative;
+}
+
+.parts-table tbody tr:hover::before {
+  content: "";
+  position: absolute;
+  background-color: #ffffff33;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.right-container h2 {
+  margin-bottom: 15px;
+}
+
+/* Added styling for the delete button */
+.parts-table button {
+  background-color: darkblue;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  align-items: center;
+}
+
+.parts-table button:hover {
+  background-color: #2980b9;
 }
 </style>
+
 

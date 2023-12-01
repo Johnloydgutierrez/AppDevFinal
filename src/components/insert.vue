@@ -34,8 +34,8 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input type="file" id="image" class="form-control" @change="handleImageChange" required>
+        <label for="partsImage" class="form-label">Image</label>
+        <input type="file" id="partsImage" class="form-control" @change="handleImageUpload" required>
       </div>
 
             
@@ -64,50 +64,103 @@ export default {
       brand: '',
       model: '',
       quantity: '',
-      image: null,
+      partsImage: null,
       price: '',
       itemId: null,
       sid: '',
     };
   },
-  methods: {
-    handleImageChange(event) {
-      this.image = event.target.files[0];
-    },
+  // methods: {
+  //   handleImageChange(event) {
+  //     this.image = event.target.files[0];
+  //   },
     
+  //   async save() {
+  //   try {
+  //       const formData = this.createFormData();
+
+  //       // Save operation
+  //       const response = await axios.post('save', formData, {
+  //           headers: {
+  //               'Content-Type': 'multipart/form-data',
+  //           },
+  //       });
+
+  //       console.log(response.data);
+
+  //       // Remove the current item from the table
+  //       if (this.itemId) {
+  //           this.info = this.info.filter(item => item.id !== this.itemId);
+  //       }
+
+  //       // Reset itemId after saving changes
+  //       this.itemId = null;
+
+  //       // Reset the form fields
+  //       this.resetForm();
+  //       this.isEditing = false;
+
+  //       // Emit an event to notify the parent component about the data update
+  //       this.$emit('data-saved');
+
+  //       // ... handle other responses or actions as needed
+  //   } catch (error) {
+  //       console.error(error);
+  //   }
+  
+
+  methods: {
     async save() {
-    try {
-        const formData = this.createFormData();
+          try {
+    // Generate a unique image name
 
-        // Save operation
-        const response = await axios.post('save', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
 
-        console.log(response.data);
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('description', this.description);
+    formData.append('brand', this.brand);
+    formData.append('model', this.model);
+    formData.append('quantity', this.quantity);
+    formData.append('image', this.partsImage, this.partsImage.name);
+    formData.append('price', this.price);
 
-        // Remove the current item from the table
-        if (this.itemId) {
-            this.info = this.info.filter(item => item.id !== this.itemId);
-        }
 
-        // Reset itemId after saving changes
-        this.itemId = null;
+    // Save the room data to the database
+    const room = await axios.post("save", formData);
 
-        // Reset the form fields
-        this.resetForm();
-        this.isEditing = false;
+    console.log("Room saved successfully:", room);
 
-        // Emit an event to notify the parent component about the data update
-        this.$emit('data-saved');
+    // Clear the form after successful submission
+    this.name = "";
+    this.description = "";
+    this.brand = "";
+    this.model = "";
+    this.quantity = "";
+    this.partsImage = null;
+    this.price = "";
 
-        // ... handle other responses or actions as needed
-    } catch (error) {
-        console.error(error);
-    }
+    // Refresh the data in the admin view
+    // this.$emit("refreshData");
+  } catch (error) {
+    console.error("Error saving room:", error);
+    // You can display an error message to the user
+  }
+
 },
+
+  handleImageUpload(event) {
+      this.partsImage = event.target.files[0];
+  },
+  getBase64Image(file) {
+      return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  },
+
 
 async updateItem() {
     try {

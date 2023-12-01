@@ -38,13 +38,19 @@
             <th style="display: none">ID</th>
             
           </tr>
-          <tr v-for="info in info" :key="info.id">
+          <tr v-for="info in ebikeparts" :key="info.id">
             <td>{{ info.name }}</td>
             <td>{{ info.description }}</td>
             <td>{{ info.brand }}</td>
             <td>{{ info.model }}</td>
             <td>{{ info.quantity }}</td>
-            <td>{{ info.image }}</td>
+            <td v-if="info.image">
+                      <img
+                        :src="info.image"
+                        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
+                        @error="handleImageError"
+                      />
+                    </td>
             <td>{{ info.price }}</td>
             <td style="display: none">{{ info.id }}</td>
             <td>
@@ -66,8 +72,8 @@ export default {
   },
   data() {
     return {
-      info: [],
-    };
+    ebikeparts: [], // Corrected property name
+  };
   },
   created() {
     this.getInfo();
@@ -75,8 +81,8 @@ export default {
   methods: {
     async getInfo() {
       try {
-        const inf = await axios.get('getData');
-        this.info = inf.data;
+        const inf = await axios.get('/ebikepartsGetData');
+        this.ebikeparts = inf.data;
       } catch (error) {
         console.error(error);
       }
@@ -121,6 +127,42 @@ export default {
 </script>
 
 <style scoped>
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 14px;
+  }
+
+  .navbar-toggler {
+    font-size: 12px;
+  }
+
+  .navbar-nav {
+    margin-top: 10px;
+  }
+
+  .floating-container {
+    flex-direction: column;
+  }
+
+  .right-container,
+  .parts-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .generate {
+    width: 100%;
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  .btn-warning {
+    width: 100%;
+  }
+}
 .floating-container  {
   display: flex;
   justify-content: space-between;

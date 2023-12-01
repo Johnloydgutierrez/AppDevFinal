@@ -84,11 +84,16 @@ export default {
 </script>
 
 <style scoped>
+body{
+  background-color: rgb(8, 99, 8);
+
+}
 .sidebar {
-  background-color: rgb(3, 187, 166);
+  background-color: rgb(0, 72, 64);
   border-radius: 15px;
   overflow: hidden;
   width: 300px;
+  
 }
 
 .sidebar h3 {
@@ -111,4 +116,5 @@ export default {
   padding: 8px 16px;
   cursor: pointer;
 }
+
 </style>

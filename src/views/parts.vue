@@ -18,11 +18,12 @@
     <table class="parts-table">
       <tr>
         <th>Name</th>
-        <th>Description</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Quantity</th>
-        <th>Price</th>
+            <th>Description</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            <th>Price</th>
       </tr>
       <tr v-for="info in info" :key="info.id">
         <td>{{ info.name }}</td>
@@ -30,6 +31,13 @@
         <td>{{ info.brand }}</td>
         <td>{{ info.model }}</td>
         <td>{{ info.quantity }}</td>
+        <td v-if="info.image">
+                      <img
+                        :src="info.image"
+                        style="max-width: 200%; max-height: 100%; width: 100px; height: auto;"
+                        @error="handleImageError"
+                      />
+                    </td>
         <td>{{ info.price }}</td>
       </tr>
     </table>
@@ -66,8 +74,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Center content vertically */
   width: 80%;
   margin: 20px auto;
+  text-align: center; /* Center content horizontally */
 }
 
 h2 {
@@ -85,7 +95,7 @@ h2 {
 .parts-table td {
   border: 1px solid #535353;
   padding: 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .parts-table th {
@@ -101,3 +111,4 @@ h2 {
   background-color: #e0e0e0; /* Slightly darker gray background on hover */
 }
 </style>
+

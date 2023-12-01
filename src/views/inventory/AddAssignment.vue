@@ -173,5 +173,27 @@ h2 {
 .custom-table tr:hover {
   background-color: lightseagreen; /* Darker gray background on hover */
 }
+@media (max-width: 767px) {
+  .top-bar {
+    padding: 5px;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .container svg {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .task-container {
+    padding: 10px;
+  }
+
+  .generate {
+    margin-bottom: 10px;
+  }
+}
 </style>
 
