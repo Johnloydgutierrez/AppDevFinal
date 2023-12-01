@@ -4,8 +4,8 @@
         <form @submit.prevent="save">
           
           <div class="mb-3">
-            <label for="productName" class="form-label">productName</label>
-            <input type="text" v-model="itemId">
+            <label for="productName" class="form-label">ProductName</label>
+            
             <input type="text" class="form-control" placeholder="productName" v-model="productName" required>
           </div>
           
@@ -16,14 +16,10 @@
           </div>
     
                 
-          <label for="category" class="form-label">Category</label>
-    <select class="form-control" v-model="category" required>
-        <!-- Add options based on your categories -->
-        <option value="category1"> 2 WHEELS</option>
-        <option value="category2">3 WHEELS</option>
-        <option value="category3">4 WHEELS</option>
-        <!-- Add more options as needed -->
-    </select>
+          <div class="mb-3">
+            <label for="category" class="form-label">category</label>
+            <input type="text" class="form-control" placeholder="category" v-model="category" required>
+          </div>
                 
           <div class="mb-3">
             <label for="price" class="form-label">price</label>
