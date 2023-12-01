@@ -36,7 +36,7 @@
           
           <div style="display: flex; justify-content: space-between;">
       <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
-      <button v-if="isEditing" type="submit" @click.prevent="updateItem" class="btn btn-danger" style="margin-right: 150px;">Update</button>
+      <button v-if="isEditing" type="submit" @click.prevent="updatecateg" class="btn btn-danger" style="margin-right: 150px;">Update</button>
       <button v-else type="submit" @click.prevent="save" class="btn btn-success">Save</button>
     </div>
     
@@ -149,13 +149,13 @@
       },
     
     
-    async updateItem() {
+    async updatecateg() {
         try {
           // console.log(this.itemId);
             const formData = this.createFormData();
             console.log(formData);
             // Update operation
-            const response = await axios.post(`updateItem/${this.sid}`,{
+            const response = await axios.post(`updatecateg/${this.sid}`,{
               'productName': this.productName,
               'description': this.description,
               'category': this.category,
