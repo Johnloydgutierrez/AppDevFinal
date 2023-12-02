@@ -196,7 +196,7 @@
 
       <div class="mb-3">
         <label for="categoryp" class="form-label">Category</label>
-        <select id="categorySelect" class="form-select"  v-model="categoryp">
+        <select id="categorySelectt" class="form-select"  v-model="categoryp">
 <option value="" disabled selected>Select option</option>
 <option v-for="categories in categories" :key="categories.category_id" :value="categories.category_id">{{ categories.category_name }}</option> //category
 </select>
@@ -211,7 +211,7 @@
       </div>
 
       <div class="mb-3">
-      <label for="quantityInput">Quantity:</label>
+      <label for="quantityInputp">Quantity:</label>
   <input type="number" id="quantityInput" class="form-control" v-model.number="quantityp" @input="updateTotalp" />
 </div>
 
@@ -320,64 +320,63 @@ axios.get('getCategory')
     },
 
     async sveinvoice() {
-      try {
-        const ins = await axios.post('saveinvoice', {
-          date: this.date,
-          customer: this.customer,
-          category: this.category,
+  try {
+    const ins = await axios.post('saveinvoice', {
+      date: this.date,
+      customer: this.customer,
+      category: this.category,
       product: this.product,
-      quantity:this.quantity,
-      totalAmount:this.totalAmount,
-      
-        });
-      this.date ='';
-      this.customer ='';
-      this.category ='';
-      this.product ='';
-      this.quantity ='';
-      this.totalAmount ='';
+      quantity: this.quantity,
+      totalAmount: this.totalAmount,
+    });
 
-      this.$emit('data-saved');
-          this.getInfo(id);
-      console.log(date,customer,category,product,quantity,totalAmount,)
+    // Reset form fields after successful submission
+    this.date = '';
+    this.customer = '';
+    this.category = '';
+    this.product = '';
+    this.quantity = '';
+    this.totalAmount = '';
 
-        
-      } catch (error) {
-        console.log(error);
-        
-      }
-     
-    },
+    // Emit an event or perform any other necessary actions after saving
+    this.$emit('data-saved');
 
-    async sveinvoicep() {
-      try {
-        const ins = await axios.post('saveinvoicep', {
-          datep: this.datep,
-          customerp: this.customerp,
-          category: this.categoryp,
-      parts:this.productp,
-      quantityp:this.quantityp,
-      totalAmountp:this.totalAmountp,
-      
-        });
-      this.datep ='';
-      this.customerp ='';
-      this.categoryp ='';
-      this.parts ='';
-      this.quantityp ='';
-      this.totalAmountp ='';
+    // Additional logic if needed
+    console.log(date, customer, category, product, quantity, totalAmount);
+  } catch (error) {
+    console.log(error);
+  }
+},
 
-      this.$emit('data-saved');
-          this.getInfo(id);
-      console.log(datep,customerp,categoryp,parts,quantityp,totalAmountp)
+async sveinvoicep() {
+  try {
+    const ins = await axios.post('saveinvoicep', {
+      datep: this.datep,
+      customerp: this.customerp,
+      categoryp: this.categoryp,
+      parts: this.parts,
+      quantityp: this.quantityp,
+      totalAmountp: this.totalAmountp,
+    });
 
-        
-      } catch (error) {
-        console.log(error);
-        
-      }
-     
-    },
+    // Reset form fields after successful submission
+    this.datep = '';
+    this.customerp = '';
+    this.categoryp = '';
+    this.parts = '';
+    this.quantityp = '';
+    this.totalAmountp = '';
+
+    // Emit an event or perform any other necessary actions after saving
+    this.$emit('data-saved');
+
+    // Additional logic if needed
+    console.log(datep, customerp, categoryp, parts, quantityp, totalAmountp);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
     
   }
 };
