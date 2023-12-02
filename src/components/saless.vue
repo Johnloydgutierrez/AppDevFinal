@@ -121,10 +121,10 @@
 <div class="container-fluid pt-4 px-4">
               <div class="bg-light text-start rounded p-4">
                   <div class="d-flex align-items-center mb-4">
-                      <h6 class="col mr-2">Recent Sales</h6>
+                      <h6 class="col mr-2">Recent Ebike Sales</h6>
               
-                      <div class="d-flex justify-content-center mr-2">
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
+                      <div class="d-flex justify-content-center">
+<a class="btn btn-primary mr-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
 <div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 <div class="offcanvas-header">
   <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
@@ -132,7 +132,7 @@
 </div>
 <div class="bg-blue offcanvas-body">
   <div class="text-light">
-    <form>
+    <form @submit.prevent="sveinvoice">
       <div class="mb-3">
         <label for="date" class="form-label">Date</label>
         <input type="date" class="form-control" placeholder="Date" v-model="date" required>
@@ -145,15 +145,17 @@
 
       <div class="mb-3">
         <label for="category" class="form-label">Category</label>
-        <select id="category" class="form-select" v-model="category" required>
-<option value="Ebike">E-Bike</option></select>
+        <select id="categorySelect" class="form-select"  v-model="category">
+<option value="" disabled selected>Select option</option>
+<option v-for="categories in categories" :key="categories.category_id" :value="categories.category_id">{{ categories.category_name }}</option> //category
+</select>
       </div>
 
       <div class="mb-3">
         <label for="product" class="form-label">Product</label>
         <select id="productSelect" class="form-select"  v-model="product" @change="updateTotal">
 <option value="" disabled selected>Select option</option>
-<option v-for="elist in elist" :key="elist.id" :value="elist.id">{{ elist.model }} - ₱{{ elist.price }}</option> //elist
+<option v-for="ebikelist in ebikelist" :key="ebikelist.id" :value="ebikelist.id">{{ ebikelist.productName }} - ₱{{ ebikelist.price }}</option> //elist
 </select>
       </div>
 
@@ -172,8 +174,6 @@
   </div>
 </div>
 </div>
-</div>
-
 <div class="d-flex justify-content-center mr-2">
 <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#ebikeparts" role="button" aria-controls="ebikeparts">Create Ebike Parts Invoice</a>
 <div class="offcanvas offcanvas-end" id="ebikeparts" aria-labelledby="ebikepartss">
@@ -183,21 +183,23 @@
 </div>
 <div class="bg-blue offcanvas-body">
   <div class="text-light">
-    <form>
+    <form @submit.prevent="sveinvoicep">
       <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" placeholder="Date" v-model="date" required>
+        <label for="datep" class="form-label">Date</label>
+        <input type="date" class="form-control" placeholder="Date" v-model="datep" required>
       </div>
 
       <div class="mb-3">
-        <label for="customer" class="form-label">Customer</label>
-        <input type="text" class="form-control" placeholder="Customer" v-model="customer" required>
+        <label for="customerp" class="form-label">Customer</label>
+        <input type="text" class="form-control" placeholder="Customer" v-model="customerp" required>
       </div>
 
       <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <select id="category" class="form-select" v-model="category" required>
-<option value="Ebike">E-Bike Parts</option></select>
+        <label for="categoryp" class="form-label">Category</label>
+        <select id="categorySelect" class="form-select"  v-model="categoryp">
+<option value="" disabled selected>Select option</option>
+<option v-for="categories in categories" :key="categories.category_id" :value="categories.category_id">{{ categories.category_name }}</option> //category
+</select>
       </div>
 
       <div class="mb-3">
@@ -210,7 +212,7 @@
 
       <div class="mb-3">
       <label for="quantityInput">Quantity:</label>
-  <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotalp" />
+  <input type="number" id="quantityInput" class="form-control" v-model.number="quantityp" @input="updateTotalp" />
 </div>
 
 <div class="mb-3">
@@ -224,24 +226,10 @@
 </div>
 </div>
 </div>
-
+</div>
                   </div>
-                  <div class="table-responsive">
-                      <table class="table text-start align-middle table-bordered table-hover mb-0">
-                          <thead>
-                              <tr class="text-dark">   
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Customer</th>
-                                  <th scope="col">Category</th>
-                                  <th scope="col">Product</th>
-                                  <th scope="col">Amount</th>
-                                  <th scope="col">Action</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                      </table>
-                  </div>
+                  
+                  
               </div>
           </div>
     </div>
@@ -254,25 +242,38 @@ export default {
   
   data() {
     return {
-      elist: [],
+      ebikelist: [],
       ebikeparts: [],
-      selectedProduct: null,
-      selectedParts: null,
+      categories: [],
+      selectedProduct: '',
+      selectedParts: '',
+      selectedCategory: '',
       quantity: 1,
       totalAmount: 0,
-      totalAmountp: 0
+      totalAmountp: 0,
+      date: '',
+      customer: '',
+      category: '',
+      product: '',
+      quantity: '',
+      datep: '',
+      customerp: '',
+      categoryp: '',
+      parts: '',
+      quantityp: '',
     };
   },
   mounted() {
     this.fetchProducts();
     this.fetchParts();
+    this.fetchCategories();
   },
   methods: {
     fetchProducts() {
 
       axios.get('getEList')
         .then(response => {
-          this.elist = response.data;
+          this.ebikelist = response.data;
         })
         .catch(error => {
           console.error('Error fetching products:', error);
@@ -289,9 +290,20 @@ export default {
         });
     },
 
+    fetchCategories() {
+
+axios.get('getCategory')
+  .then(response => {
+    this.categories = response.data;
+  })
+  .catch(error => {
+    console.error('Error fetching categories:', error);
+  });
+},
+
     updateTotal() {
       if (this.product !== null) {
-        const product = this.elist.find(elist => elist.id === this.product);
+        const product = this.ebikelist.find(ebikelist => ebikelist.id === this.product);
         this.totalAmount = product.price * this.quantity;
       } else {
         this.totalAmount = 0;
@@ -301,11 +313,72 @@ export default {
     updateTotalp() {
       if (this.parts !== null) {
         const parts = this.ebikeparts.find(ebikeparts => ebikeparts.ID === this.parts);
-        this.totalAmountp = parts.price * this.quantity;
+        this.totalAmountp = parts.price * this.quantityp;
       } else {
         this.totalAmountp = 0;
       }
-    }
+    },
+
+    async sveinvoice() {
+      try {
+        const ins = await axios.post('saveinvoice', {
+          date: this.date,
+          customer: this.customer,
+          category: this.category,
+      product: this.product,
+      quantity:this.quantity,
+      totalAmount:this.totalAmount,
+      
+        });
+      this.date ='';
+      this.customer ='';
+      this.category ='';
+      this.product ='';
+      this.quantity ='';
+      this.totalAmount ='';
+
+      this.$emit('data-saved');
+          this.getInfo(id);
+      console.log(date,customer,category,product,quantity,totalAmount,)
+
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+     
+    },
+
+    async sveinvoicep() {
+      try {
+        const ins = await axios.post('saveinvoicep', {
+          datep: this.datep,
+          customerp: this.customerp,
+          category: this.categoryp,
+      parts:this.productp,
+      quantityp:this.quantityp,
+      totalAmountp:this.totalAmountp,
+      
+        });
+      this.datep ='';
+      this.customerp ='';
+      this.categoryp ='';
+      this.parts ='';
+      this.quantityp ='';
+      this.totalAmountp ='';
+
+      this.$emit('data-saved');
+          this.getInfo(id);
+      console.log(datep,customerp,categoryp,parts,quantityp,totalAmountp)
+
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+     
+    },
+    
   }
 };
 </script>
