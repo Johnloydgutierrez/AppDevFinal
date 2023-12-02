@@ -1,114 +1,107 @@
-<template>
-     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Modern Business - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<template> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <router-link to="/Nhome" class="navbar-brand">BACK</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-     
+      <router-link to="/Nhome" class="navbar-brand bg-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+  <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+  </svg>Back</router-link>  
+      <div class="collapse navbar-collapse" id="navbarNav">   
+      </div>
     </div>
   </nav>
-            <!-- Pricing section-->
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-<div class="page-content container">
-    <div class="page-header text-blue-d2">
-        <br>
-        <br>
-        <br>
-        <h1 class="page-title text-secondary-d1">
-            Payment History
-        </h1>
-
-
-    </div>
-
-    <div class="container px-0">
-        <div class="row mt-4">
-            <div class="col-12 col-lg-12">
-                <div class="row">
-                    <div class="col-12">
-                    
+        <div class="container-fluid bg-cyan">
+        <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-start rounded p-4">
+                  <h6 class="col mr-2">Ebike Sales</h6>
+                  <div class="table-responsive overflow-auto">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">   
+                                    <th scope="col">Date</th>
+                                   <th scope="col">Customer</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="invoice in invoice" :key="invoice.id">
+          <td>{{ invoice.date }}</td>
+          <td>{{ invoice.customer }}</td>
+          <td>{{ invoice.category }}</td>
+          <td>{{ invoice.product }}</td>
+          <td>{{ invoice.quantity }}</td>
+          <td>{{ invoice.totalAmount }}</td>
+        </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <!-- .row -->
-
-                <hr class="row brc-default-l1 mx-n1 mb-4" />
-
-                <div class="row">
-
-                    <!-- or use a table instead -->
-                    
-            <div class="table-responsive">
-                <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-                    <thead class="bg-none bgc-default-tp1">
-                        <tr class="text-white">
-                            <th class="opacity-2">#</th>
-                            <th>Description</th>
-                            <th>Qty</th>
-                            <th>Unit Price</th>
-                            <th width="140">Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="text-95 text-secondary-d3">
-                        <tr></tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Domain registration</td>
-                            <td>2</td>
-                            <td class="text-95">$10</td>
-                            <td class="text-secondary-d2">$20</td>
-                        </tr> 
-                    </tbody>
-                </table>
-            </div>
-                    <hr />
-
-                    <div>
-                    
-                        <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Next Page?</a>
-                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-        </main>
-        <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2023</div></div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
+  
+                <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-start rounded p-4">
+                  <h6 class="col mr-2">Parts Sales</h6>
+                <div class="table-responsive overflow-auto">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">   
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="invoicep in invoicep" :key="invoicep.id">
+          <td>{{ invoicep.datep }}</td>
+          <td>{{ invoicep.customerp }}</td>
+          <td>{{ invoicep.categoryp }}</td>
+          <td>{{ invoicep.quantityp }}</td>
+          <td>{{ invoicep.totalAmountp }}</td>
+        </tr>
+                            </tbody>
+                        </table>
                     </div>
+              </div>
                 </div>
-            </div>
-        </footer>
-        
-    </body>
-</template>
-<style>
-@import'../assets/asset/css/nfront.css';
-</style>
+              </div>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
+    data() {
+      return {
+        invoice: [],
+      };
+    },
+    created() {
+      this.getInvoice();
+    },
+    methods: {
+      async getInvoice() {
+        try {
+          const inv = await axios.get('getInvoice');
+          this.invoice = inv.data;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
+  };
+  </script>
+  
+  <style scoped>
+  .container-fluid {
+    background-color: rgb(0, 255, 221); /* Set your desired green color code */
+    padding: 20px; /* Adjust padding as needed */
+  }
+  
+  /* Add any additional styles for the container */
+  </style>
+  
