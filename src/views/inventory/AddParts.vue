@@ -21,9 +21,7 @@
       <div class="parts-container">
         <br>
         <h2>E-Bike Parts Inventory</h2>
-        <button class="btn btn-primary generate" @click="generatePDF">
-    Generate Report
-</button>
+      
         <table border="1" class="parts-table">
           <tr>
 
