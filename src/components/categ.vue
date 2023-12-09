@@ -20,6 +20,11 @@
             <label for="category" class="form-label">category</label>
             <input type="text" class="form-control" placeholder="category" v-model="category" required>
           </div>
+
+          <div class="mb-3">
+            <label for="quantity" class="form-label">quantity</label>
+            <input type="text" class="form-control" placeholder="quantity" v-model="quantity" required>
+          </div>
                 
           <div class="mb-3">
             <label for="price" class="form-label">price</label>
@@ -54,6 +59,7 @@
           description: '',
           category: '',
           categImage: null,
+          quantity: '',
           price: '',
           itemId: null,
           sid: '',
@@ -111,6 +117,8 @@
        
         formData.append('category', this.category);
         formData.append('categImage', this.categImage);
+
+        formData.append('quantity', this.quantity);
         formData.append('price', this.price);
     
     
@@ -125,6 +133,7 @@
         this.category = "";
        
         this.categImage = null;
+        this.quantity = "";
         this.price = "";
     
         // Refresh the data in the admin view
@@ -161,6 +170,7 @@
               'category': this.category,
               
               'categImage': this.categImage,
+              'quantity': this.quantity,
               'price': this.price,
             },
             {
@@ -203,6 +213,7 @@
           formData.append('category', this.category);
         
           formData.append('categImage', this.categImage);
+          formData.append('quantity', this.quantity);
           formData.append('price', this.price);
     
           return formData;

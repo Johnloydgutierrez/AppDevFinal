@@ -10,7 +10,7 @@
           <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      Paid</div>
+                      EBIKE</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
               </div>
               <div class="col-auto">
@@ -27,7 +27,7 @@
           <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                      Installment</div>
+                      EBIKE PARTS</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
               </div>
               <div class="col-auto">
@@ -43,7 +43,7 @@
       <div class="card-body">
           <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Unpaid
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">TOTAL PRODUCTS
                   </div>
                   <div class="row no-gutters align-items-center">
                       <div class="col-auto">
@@ -120,11 +120,8 @@
 </div>
 <div class="container-fluid pt-4 px-4">
               <div class="bg-light text-start rounded p-4">
-                  <div class="d-flex align-items-center mb-4">
-                      <h6 class="col mr-2">Recent Ebike Sales</h6>
-              
                       <div class="d-flex justify-content-center">
-<a class="btn btn-primary mr-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Ebike Invoice</a>
+<a class="btn btn-primary mr-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Create Invoice</a>
 <div class="offcanvas offcanvas-end" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 <div class="offcanvas-header">
   <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Ebike Invoice</h5>
@@ -133,10 +130,10 @@
 <div class="bg-blue offcanvas-body">
   <div class="text-light">
     <form @submit.prevent="sveinvoice">
-      <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" placeholder="Date" v-model="date" required>
-      </div>
+
+      <div class="mb-3" v-if="invoiceID">
+              Invoice ID: <b>{{ invoiceID }}</b>
+        </div>
 
       <div class="mb-3">
         <label for="customer" class="form-label">Customer</label>
@@ -152,6 +149,10 @@
       </div>
 
       <div class="mb-3">
+        <label for="comment" class="form-label">IF PARTS ONLY SELECT DEFAULT</label>
+      </div>
+
+      <div class="mb-3">
         <label for="product" class="form-label">Product</label>
         <select id="productSelect" class="form-select"  v-model="product" @change="updateTotal">
 <option value="" disabled selected>Select option</option>
@@ -161,48 +162,20 @@
 
       <div class="mb-3">
       <label for="quantityInput">Quantity:</label>
-  <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" />
+  <input type="number" id="quantityInput" class="form-control" v-model.number="quantity" @input="updateTotal" @change="GrandAmount" />
 </div>
 
+
 <div class="mb-3">
-  <label for="totalAmount">Total Amount:</label>
+  <label for="totalAmount">Amount:</label>
   <p class="form-control" id="totalAmount">₱{{ totalAmount }}</p>
 </div>
 
-      <button type="submit" class="btn btn-danger">Invoice</button>
-    </form>
-  </div>
-</div>
-</div>
-<div class="d-flex justify-content-center mr-2">
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#ebikeparts" role="button" aria-controls="ebikeparts">Create Ebike Parts Invoice</a>
-<div class="offcanvas offcanvas-end" id="ebikeparts" aria-labelledby="ebikepartss">
-<div class="offcanvas-header">
-  <h5 class="offcanvas-title" id="ebikepartss">New Ebike Invoice</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-</div>
-<div class="bg-blue offcanvas-body">
-  <div class="text-light">
-    <form @submit.prevent="sveinvoicep">
-      <div class="mb-3">
-        <label for="datep" class="form-label">Date</label>
-        <input type="date" class="form-control" placeholder="Date" v-model="datep" required>
+<div class="mb-3">
+        <label for="comment" class="form-label">IF EBIKE ONLY SELECT DEFAULT</label>
       </div>
 
-      <div class="mb-3">
-        <label for="customerp" class="form-label">Customer</label>
-        <input type="text" class="form-control" placeholder="Customer" v-model="customerp" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="categoryp" class="form-label">Category</label>
-        <select id="categorySelectt" class="form-select"  v-model="categoryp">
-<option value="" disabled selected>Select option</option>
-<option v-for="categories in categories" :key="categories.category_id" :value="categories.category_id">{{ categories.category_name }}</option> //category
-</select>
-      </div>
-
-      <div class="mb-3">
+<div class="mb-3">
         <label for="parts" class="form-label">Product</label>
         <select id="partsSelect" class="form-select"  v-model="parts" @change="updateTotalp">
 <option value="" disabled selected>Select option</option>
@@ -212,18 +185,22 @@
 
       <div class="mb-3">
       <label for="quantityInputp">Quantity:</label>
-  <input type="number" id="quantityInput" class="form-control" v-model.number="quantityp" @input="updateTotalp" />
+  <input type="number" id="quantityInput" class="form-control" v-model.number="quantityp" @input="updateTotalp" @change="GrandAmount"/>
 </div>
 
 <div class="mb-3">
-  <label for="totalAmountp">Total Amount:</label>
+  <label for="totalAmountp">Amount:</label>
   <p class="form-control" id="totalAmountp">₱{{ totalAmountp }}</p>
+</div>
+
+<div class="mb-3">
+  <label for="grandAmountp">Total Amount:</label>
+  <p class="form-control" id="grandAmountp" >₱{{ grandAmountp }}</p>
 </div>
 
       <button type="submit" class="btn btn-danger">Invoice</button>
     </form>
   </div>
-</div>
 </div>
 </div>
 </div>
@@ -233,7 +210,6 @@
               </div>
           </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -248,20 +224,20 @@ export default {
       selectedProduct: '',
       selectedParts: '',
       selectedCategory: '',
-      quantity: 1,
+      quantity: '',
       totalAmount: 0,
       totalAmountp: 0,
-      date: '',
       customer: '',
       category: '',
       product: '',
-      quantity: '',
-      datep: '',
-      customerp: '',
-      categoryp: '',
       parts: '',
       quantityp: '',
-    };
+      grandAmountp: 0,
+      invoiceID: null,
+        };
+  },
+  created(){
+    this.invoiceID = this.generateRandomKey();
   },
   mounted() {
     this.fetchProducts();
@@ -319,64 +295,60 @@ axios.get('getCategory')
       }
     },
 
+    GrandAmount() {
+      if (this.totalAmount && this.totalAmountp !== null) {
+        this.grandAmountp = this.totalAmount+this.totalAmountp;
+      } else {
+        this.grandAmountp = 0;
+      }
+    },
+
     async sveinvoice() {
   try {
     const ins = await axios.post('saveinvoice', {
-      date: this.date,
+      invoiceID: this.invoiceID,
       customer: this.customer,
       category: this.category,
       product: this.product,
       quantity: this.quantity,
       totalAmount: this.totalAmount,
+      parts: this.parts,
+      quantityp: this.quantityp,
+      totalAmountp: this.totalAmountp,
+      grandAmountp: this.grandAmountp,
     });
 
     // Reset form fields after successful submission
-    this.date = '';
     this.customer = '';
     this.category = '';
     this.product = '';
     this.quantity = '';
     this.totalAmount = '';
+    this.parts = '';
+    this.quantityp = '';
+    this.totalAmountp = '';
+    this.grandAmountp = '';
 
     // Emit an event or perform any other necessary actions after saving
     this.$emit('data-saved');
 
     // Additional logic if needed
-    console.log(date, customer, category, product, quantity, totalAmount);
+    console.log( customer, category, product, parts, quantity, quantityp, totalAmount, totalAmountp, grandAmountp);
   } catch (error) {
     console.log(error);
   }
 },
 
-async sveinvoicep() {
-  try {
-    const ins = await axios.post('saveinvoicep', {
-      datep: this.datep,
-      customerp: this.customerp,
-      categoryp: this.categoryp,
-      parts: this.parts,
-      quantityp: this.quantityp,
-      totalAmountp: this.totalAmountp,
-    });
-
-    // Reset form fields after successful submission
-    this.datep = '';
-    this.customerp = '';
-    this.categoryp = '';
-    this.parts = '';
-    this.quantityp = '';
-    this.totalAmountp = '';
-
-    // Emit an event or perform any other necessary actions after saving
-    this.$emit('data-saved');
-
-    // Additional logic if needed
-    console.log(datep, customerp, categoryp, parts, quantityp, totalAmountp);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+generateRandomKey() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      const length = 8;
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+      return result;
+    },
     
   }
 };

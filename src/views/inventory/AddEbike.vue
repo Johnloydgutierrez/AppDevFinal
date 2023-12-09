@@ -30,6 +30,7 @@
     <th>description</th>
     <th>category</th>
     <th>categImage</th>
+    <th>quantity</th>
     <th>price</th>
     <th>action</th>
     <th style="display: none">ID</th>
@@ -45,6 +46,7 @@
         @error="handlecategImageError"
       />
     </td>
+    <td>{{ info.quantity }}</td>
     <td>{{ info.price }}</td>
     <td style="display: none">{{ info.id }}</td>
     <td>
@@ -94,6 +96,7 @@ export default {
      
       formComponent.category = selectedInfo.category;
       formComponent.categImage = selectedInfo.categImage;
+      formComponent.quantity = selectedInfo.quantity;
       formComponent.price = selectedInfo.price;
 
       // Store the selected item's ID for updating it later
