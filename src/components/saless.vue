@@ -238,6 +238,8 @@ export default {
   },
   created(){
     this.invoiceID = this.generateRandomKey();
+    
+    
   },
   mounted() {
     this.fetchProducts();
