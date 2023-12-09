@@ -20,16 +20,12 @@
       </div>
       <div class="parts-container">
         <br>
-        <h2>E-Bike Parts Inventory</h2>
-        <button class="btn btn-primary generate" @click="generatePDF">
-    Generate Report
-</button>
+        <h2>Add E-Bike</h2>
 <table border="1" class="parts-table">
   <tr>
     <th>productName</th>
     <th>description</th>
     <th>category</th>
-    <th>categImage</th>
     <th>quantity</th>
     <th>price</th>
     <th>action</th>
@@ -39,14 +35,14 @@
     <td>{{ info.productName }}</td>
     <td>{{ info.description }}</td>
     <td>{{ info.category }}</td>
-    <td v-if="info.categImage">
-      <img
-        :src="info.categImage"
-        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
-        @error="handlecategImageError"
-      />
-    </td>
     <td>{{ info.quantity }}</td>
+    <td v-if="info.image">
+                      <img
+                        :src="info.image"
+                        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
+                        @error="handleImageError"
+                      />
+                    </td>
     <td>{{ info.price }}</td>
     <td style="display: none">{{ info.id }}</td>
     <td>
@@ -69,7 +65,7 @@ export default {
   },
   data() {
     return {
-    ebikelist: [], // Corrected property productName
+    ebikelist: [], 
   };
   },
   created() {
@@ -93,18 +89,15 @@ export default {
       formComponent.id = selectedInfo.ID;
       formComponent.sid = selectedInfo.ID;
       formComponent.productName = selectedInfo.productName;
-     
+      formComponent.description = selectedInfo.description;
       formComponent.category = selectedInfo.category;
-      formComponent.categImage = selectedInfo.categImage;
       formComponent.quantity = selectedInfo.quantity;
+      formComponent.image = selectedInfo.image;
       formComponent.price = selectedInfo.price;
 
       // Store the selected item's ID for updating it later
       formComponent.itemId = selectedInfo.id;
       formComponent.isEditing = true;
-    },
-    generatePDF() {
-      // Your existing code for generating PDF
     },
     async updateItem(editedItem) {
       try {
@@ -114,6 +107,8 @@ export default {
         // Update the local data with the edited item
         const index = this.info.findIndex(item => item.id === editedItem.id);
         this.$set(this.info, index, editedItem);
+
+        
       } catch (error) {
         console.error(error);
       }

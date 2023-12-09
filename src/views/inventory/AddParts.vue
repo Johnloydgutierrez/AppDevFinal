@@ -105,9 +105,6 @@ export default {
       formComponent.itemId = selectedInfo.id;
       formComponent.isEditing = true;
     },
-    generatePDF() {
-      // Your existing code for generating PDF
-    },
     async updateItem(editedItem) {
       try {
         // Make a PUT request to update the item in your database

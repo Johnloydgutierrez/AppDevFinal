@@ -15,6 +15,9 @@
       </div>
       <div class="container-fluid bg-cyan">
       <div class="container-fluid pt-4 px-4">
+        <button class="btn btn-primary generate" @click="generatePdf">
+    Generate Report
+</button>
               <div class="bg-light text-start rounded p-4">
                 <h6 class="col mr-2">Ebike Sales</h6>
                 <div class="table-responsive overflow-auto">
@@ -83,6 +86,30 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+      generatePdf() {
+      fetch("http://localhost:8080/generatePdf", {
+        method: "GET", // Use GET instead of POST if you're not sending any data
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+          }
+          return response.blob();
+        })
+        .then((blob) => {
+          const url = window.URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "output.pdf");
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Error generating or loading PDF:", error);
+        });
     },
   },
 };

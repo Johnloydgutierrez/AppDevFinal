@@ -5,7 +5,7 @@
           
           <div class="mb-3">
             <label for="productName" class="form-label">ProductName</label>
-            
+            <input type="text" v-model="itemId">
             <input type="text" class="form-control" placeholder="productName" v-model="productName" required>
           </div>
           
@@ -25,23 +25,22 @@
             <label for="quantity" class="form-label">quantity</label>
             <input type="text" class="form-control" placeholder="quantity" v-model="quantity" required>
           </div>
+
+          
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" id="image" class="form-control" @change="handleImageUpload" required>
+          </div>
                 
           <div class="mb-3">
             <label for="price" class="form-label">price</label>
             <input type="text" class="form-control" placeholder="price" v-model="price" required>
           </div>
-                
-         
-    
-          <div class="mb-3">
-            <label for="categImage" class="form-label">Image</label>
-            <input type="file" id="categImage" class="form-control" @change="handleImageUpload" required>
-          </div>
     
           
           <div style="display: flex; justify-content: space-between;">
       <button v-if="isEditing" type="button" @click="cancelEdit" class="btn btn-secondary">Cancel</button>
-      <button v-if="isEditing" type="submit" @click.prevent="updatecateg" class="btn btn-danger" style="margin-right: 150px;">Update</button>
+      <button v-if="isEditing" type="submit" @click.prevent="updateItem" class="btn btn-danger" style="margin-right: 150px;">Update</button>
       <button v-else type="submit" @click.prevent="save" class="btn btn-success">Save</button>
     </div>
     
@@ -58,8 +57,8 @@
           productName: '',
           description: '',
           category: '',
-          categImage: null,
           quantity: '',
+          image: '',
           price: '',
           itemId: null,
           sid: '',
@@ -114,11 +113,9 @@
         const formData = new FormData();
         formData.append('productName', this.productName);
         formData.append('description', this.description);
-       
         formData.append('category', this.category);
-        formData.append('categImage', this.categImage);
-
         formData.append('quantity', this.quantity);
+        formData.append('image', this.image);
         formData.append('price', this.price);
     
     
@@ -131,9 +128,8 @@
         this.productName = "";
         this.description = "";
         this.category = "";
-       
-        this.categImage = null;
         this.quantity = "";
+        this.image = "";
         this.price = "";
     
         // Refresh the data in the admin view
@@ -158,19 +154,18 @@
       },
     
     
-    async updatecateg() {
+    async updateItem() {
         try {
           // console.log(this.itemId);
             const formData = this.createFormData();
             console.log(formData);
             // Update operation
-            const response = await axios.post(`updatecateg/${this.sid}`,{
+            const response = await axios.post(`updateItem/${this.sid}`,{
               'productName': this.productName,
               'description': this.description,
               'category': this.category,
-              
-              'categImage': this.categImage,
               'quantity': this.quantity,
+              'image': this.image,
               'price': this.price,
             },
             {
@@ -211,9 +206,8 @@
           formData.append('productName', this.productName);
           formData.append('description', this.description);
           formData.append('category', this.category);
-        
-          formData.append('categImage', this.categImage);
           formData.append('quantity', this.quantity);
+          formData.append('image', this.image);
           formData.append('price', this.price);
     
           return formData;
@@ -225,7 +219,7 @@
           this.category = '';
           this.model = '';
           this.quantity = '';
-          this.categImage = null;
+          this.image = '';
           this.price = '';
         },
       },
