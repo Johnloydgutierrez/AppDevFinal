@@ -15,10 +15,6 @@
       
       <div class="task-container">
         <h2>Add Assignmen</h2>
-        <button class="btn btn-primary generate" @click="generatePDF">
-    Generate Report
-</button>
-    
         <br> <!-- Add a line break for separation -->
         <table class="task-table custom-table">
           <tr>
