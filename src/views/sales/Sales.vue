@@ -87,7 +87,7 @@ export default {
         console.log(error);
       }
     },
-      generatePdf() {
+    generatePdf() {
       fetch("http://localhost:8080/generatePdf", {
         method: "GET", // Use GET instead of POST if you're not sending any data
         headers: {
@@ -96,6 +96,7 @@ export default {
       })
         .then((response) => {
           if (!response.ok) {
+          
           }
           return response.blob();
         })
