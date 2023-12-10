@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black ">
     <div class="container">
-      <router-link to="/Admin" class="navbar-brand bg-dark">
+      <router-link to="/Admin" class="navbar-brand bg-black">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
 </svg>Back</router-link>
@@ -163,7 +163,8 @@ export default {
   justify-content: space-between;
   width: 100%;
   margin: 0;
-  background-color: darkcyan;
+  background-size: cover;
+  background-image: url('https://t3.ftcdn.net/jpg/02/70/15/92/360_F_270159265_t8pQOL3pEaNMEytjL7ZN8yydNjfRIaE2.jpg');
 }
 
 .right-container {
@@ -190,12 +191,14 @@ export default {
 .parts-table th,
 .parts-table td {
   padding: 15px;
-  color: #fff;
-  border: 1px solid #01030f; /* Add border styling */
+  color: #000000;
+  border: 1px solid #01030f;
+  background-color: #ededf0; /* Add border styling */
 }
 
 .parts-table th {
-  background-color: #55608f;
+  background-color: #525770;
+  color: #fff;
 }
 
 .parts-table tr:hover {
@@ -223,7 +226,7 @@ export default {
 
 /* Added styling for the delete button */
 .parts-table button {
-  background-color: darkblue;
+  background-color: rgb(99, 99, 131);
   color: #ffffff;
   border: none;
   padding: 8px 16px;

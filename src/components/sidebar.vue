@@ -1,5 +1,5 @@
 <template>
-    <ul class="navbar-nav bg-blue sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-black sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Nhome">
@@ -15,7 +15,7 @@
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
 
-  <a class="nav-link" href="/Admin">
+  <a class="nav-link sidebar-heading text-white" href="/Admin">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Admin Dashboard</span></a>
 
@@ -27,23 +27,20 @@
 <hr class="sidebar-divider">
 
 <!-- Heading -->
-<div class="sidebar-heading text-black ">
-  Inventory management
-</div>
+
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
 
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+  <a class="nav-link collapsed sidebar-heading text-white" href="#" data-toggle="collapse" data-target="#collapseTwo"
       aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fas fa-fw fa-cog"></i>
-      <span style="font-size: 13px; color: white;">Inventory</span>
+      <i class="fas fa-fw fa-cog "></i>
+      <span style="font-size: 13px; color: white;">Inventory Management</span>
   </a>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">List of Our Products</h6>
+          <h6 class="collapse-header">Inventory</h6>
           <a class="collapse-item" href="/AddEbike">E-Bike List</a>
-          <a class="collapse-item" href="/AddAssignment">Staff Assignment Service</a>
           <a class="collapse-item" href="/AddParts">Ebike Parts Products</a>
       </div>
   </div>
@@ -52,10 +49,30 @@
 
 </li>
 
+<li class="nav-item">
+
+<a class="nav-link collapsed sidebar-heading text-white" href="#" data-toggle="collapse" data-target="#collapseTw"
+    aria-expanded="true" aria-controls="collapseTw">
+    <i class="fas fa-fw fa-cog "></i>
+    <span style="font-size: 13px; color: white;">Staff Management</span>
+</a>
+<div id="collapseTw" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Staff Task</h6>
+  
+        <a class="collapse-item" href="/AddAssignment">Staff Assignment Service</a>
+
+    </div>
+</div>
+
+  
+
+</li>
+
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
 
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+    <a class="nav-link collapsed sidebar-heading text-white" href="#" data-toggle="collapse" data-target="#collapseUtilities"
         aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
         <span style="font-size: 13px; color: white;">Sales Management</span>
@@ -78,8 +95,8 @@
 </li>
 
 <!-- Sidebar Toggler (Sidebar) -->
-<div class="text-center d-none d-md-inline">
-  <button class="rounded-circle border-0" id="sidebarToggle"></button>
+<div class="text-center d-md-inline">
+  <button class="rounded-circle border-0">☼</button>
 </div>
 </ul>
 </template>

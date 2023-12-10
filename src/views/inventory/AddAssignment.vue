@@ -2,7 +2,7 @@
   <div class="top-bar">
   <a href="/Admin" >
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
 </svg>
   </a>
@@ -14,7 +14,7 @@
     <div class="main-content">
       
       <div class="task-container">
-        <h2>Add Assignmen</h2>
+        <h2>Add Assignment</h2>
         <br> <!-- Add a line break for separation -->
         <table class="task-table custom-table">
           <tr>
@@ -32,7 +32,7 @@
             <td>{{ info.contact }}</td>
             <td>{{ info.costumer }}</td>
             <td>
-              <v-btn @click="deleteRecord(info.id)" color="red" dark>
+              <v-btn @click="deleteRecord(info.id)" color="indigo" dark>
                 Task Complete
               </v-btn>
             </td>
@@ -88,7 +88,7 @@ export default {
  
 
  .top-bar {
-      background-color: #333; /* Set your desired background color */
+      background-color: #000000; /* Set your desired background color */
       color: #fff; /* Set your desired text color */
       padding: 10px; /* Adjust padding as needed */
       text-align: left; /* Center the content */
@@ -158,16 +158,18 @@ h2 {
 }
 
 .custom-table th {
-  background-color: darkcyan; /* Dark gray header background color */
+  background-color: rgb(58, 58, 124); /* Dark gray header background color */
   color: black; /* White text color */
 }
+
+
 
 .custom-table tr:nth-child(even) {
   background-color: #bdbdbd; /* Darker gray background for even rows */
 }
 
 .custom-table tr:hover {
-  background-color: lightseagreen; /* Darker gray background on hover */
+  background-color: rgb(154, 150, 205); /* Darker gray background on hover */
 }
 @media (max-width: 767px) {
   .top-bar {

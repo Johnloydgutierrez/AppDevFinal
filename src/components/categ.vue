@@ -228,7 +228,7 @@
       
       <style scoped>
       .bg-dark-blue {
-      background-color: rgb(8, 119, 188)}
+      background-color: rgb(5, 22, 90)}
       .sidebar {
         height: 100%;
       }

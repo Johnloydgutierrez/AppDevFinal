@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black ">
     <div class="container">
-      <router-link to="/Admin" class="navbar-brand bg-dark">
+      <router-link to="/Admin" class="navbar-brand bg-black">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
   <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
 </svg>Back</router-link>
@@ -160,7 +160,8 @@ export default {
   justify-content: space-between;
   width: 100%;
   margin: 0;
-  background-color: darkcyan;
+  background-image: url('https://i.ibb.co/fGhjxKM/nwowbg.jpg');
+ 
 }
 
 .right-container {
@@ -187,12 +188,14 @@ export default {
 .parts-table th,
 .parts-table td {
   padding: 15px;
-  color: #fff;
-  border: 1px solid #01030f; /* Add border styling */
+  color: #000000;
+  border: 1px solid #01030f;
+  background-color: #eef0f7; /* Add border styling */
 }
 
 .parts-table th {
-  background-color: #55608f;
+  background-color: #030f45;
+  color: #ffffff;
 }
 
 .parts-table tr:hover {
@@ -230,7 +233,7 @@ export default {
 }
 
 .parts-table button:hover {
-  background-color: #2980b9;
+  background-color: #0a3e61;
 }
 </style>
 

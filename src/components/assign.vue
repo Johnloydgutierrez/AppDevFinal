@@ -30,7 +30,7 @@
         <input type="text" class="form-control" placeholder="Costumer" v-model="costumer" required>
       </div>
 
-      <button type="submit" class="btn btn-success">Save</button>
+      <button type="submit" class="btn btn-info">Save</button>
       
     </form>
   </div>
@@ -89,7 +89,7 @@ body{
 
 }
 .sidebar {
-  background-color: rgb(0, 72, 64);
+  background-color: rgb(58, 58, 124);
   border-radius: 15px;
   overflow: hidden;
   width: 300px;

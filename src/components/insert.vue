@@ -238,7 +238,7 @@ cancelEdit() {
   
   <style scoped>
   .bg-dark-blue {
-  background-color: rgb(8, 119, 188)}
+  background-color: rgb(74, 94, 106)}
   .sidebar {
     height: 100%;
   }

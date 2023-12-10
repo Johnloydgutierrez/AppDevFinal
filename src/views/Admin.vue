@@ -44,9 +44,6 @@
           '/scriptedJS/bootstrap.bundle.min.js',
           '/scriptedJS/jquery.easing.min.js',
           '/scriptedJS/sb-admin-2.min.js',
-          '/scriptedJS/Chart.min.js',
-          '/scriptedJS/chart-area-demo.js',
-          '/scriptedJS/chart-pie-demo.js',
         ]);
       });
     },
