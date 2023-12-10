@@ -1,5 +1,5 @@
 <template>
-  <div class="background-container">
+  <div class="background-container flex">
     <div class="container">
       <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
         <div class="v-container theme-container">
@@ -22,12 +22,12 @@
                 outlined
                 :color="black"
               >
-                <template v-slot:prepend-inner>
+                <template v-slot:append-inner>
                   <v-icon @click="togglePasswordVisibility">{{ showPassword ? 'mdi-eye' : 'mdi-eye-off' }}</v-icon>
                 </template>
               </v-text-field>
 
-          <v-btn type="submit" block class="mt-3" color="success">Login</v-btn>
+          <v-btn type="submit" block class="mt-3" color="info">Login</v-btn>
           <router-link to="/signup" class="d-block mt-2">
   <v-btn color="red" block>
     Don't have an account?
@@ -114,11 +114,9 @@ export default {
 }
 
 .background-container {
-  background-color: rgb(4, 4, 135);
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: url('https://i.ibb.co/fGhjxKM/nwowbg.jpg');
+  width: 1600x;
+  height: 900x;
 }
 
 .container {

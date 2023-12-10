@@ -39,7 +39,7 @@
             
             <!-- Header-->
             
-            <header class="bg-blue py-5">
+            <header class="background-container py-5">
                             <div>
                 <header class="bg- py-5">
                 <div class="container px-5">
@@ -47,8 +47,8 @@
                     <div class="col-xl-5 col-xxl-6 text-center"> <img class="img-fluid rounded-3 my-5" src="https://prof562e926-pic5.ysjianzhan.cn/upload/3002.png" alt="..." /></div>
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <div class="my-5 text-center text-xl-start">
-                        <h1 class=" display-5 fw-bolder text-white mb-2">NWOW E-Bike </h1>
-                        <p class="lead fw-normal text-white-50 mb-4">Easy to BUY Easy to RIDE!</p>
+                        <h1 class=" display-5 fw-bolder text-black mb-2">NWOW E-Bike </h1>
+                        <p class="lead fw-normal text-black-50 mb-4">Easy to BUY Easy to RIDE!</p>
                         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                             <a href="/Admin" class="button"><span>Administrator</span></a>
                             <a href="/payment" class="button"><span>Payment history</span></a>
@@ -126,7 +126,7 @@
 
         </div>
         <!-- Call to action-->
-        <aside class="bg-success rounded-3 p-4 p-sm-5 mt-5">
+        <aside class="bg- rounded-3 p-4 p-sm-5 mt-5">
             <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                 <div class="mb-4 mb-xl-0">
                     <div class="d-flex justify-content-center align-items-center text-center vh-10">
@@ -187,13 +187,17 @@ export default{
    
   display: inline-block;
   text-decoration: none;
-  color: #120817;
-  background-color: rgba(42, 121, 47, 0.435);
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.435);
   border-radius: 0.25rem;
 }
 
 .button:hover span {
-  background-color: #2ac043;
+  background-color: #000000;
+}
+
+.background-container {
+  background-image: url('https://prof562e926-pic5.ysjianzhan.cn/upload/GSERIES_7koh.jpg');
 }
 
 .button:active span {
@@ -203,10 +207,10 @@ export default{
 .button span {
   display: inherit;
   border-radius: inherit;
-  background-color: #58a245;
+  background-color: #060f86;
   padding: 1rem 2rem;
   transform: translate(0.25rem, -0.25rem); /* Corrected from 'translate' to 'transform' */
-  border: 2px solid #2a7948;
+  border: 2px solid #f6ffd0;
   transition: transform 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
               background-color 250ms;
 }
