@@ -191,5 +191,10 @@ h2 {
     margin-bottom: 10px;
   }
 }
+@media screen and (max-width: 768px) {
+  .floating-container {
+    padding: 0 10px; /* Add some padding for smaller screens */
+  }
+}
 </style>
 

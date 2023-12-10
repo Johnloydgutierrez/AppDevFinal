@@ -116,5 +116,10 @@ body{
   padding: 8px 16px;
   cursor: pointer;
 }
+@media screen and (max-width: 768px) {
+  .floating-container {
+    padding: 0 10px; /* Add some padding for smaller screens */
+  }
+}
 
 </style>

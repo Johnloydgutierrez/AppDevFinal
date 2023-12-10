@@ -27,6 +27,7 @@
     <th>description</th>
     <th>category</th>
     <th>quantity</th>
+    <th>cateImage</th>
     <th>price</th>
     <th>action</th>
     <th style="display: none">ID</th>
@@ -36,13 +37,13 @@
     <td>{{ info.description }}</td>
     <td>{{ info.category }}</td>
     <td>{{ info.quantity }}</td>
-    <td v-if="info.image">
-                      <img
-                        :src="info.image"
-                        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
-                        @error="handleImageError"
-                      />
-                    </td>
+    <td v-if="info.categImage">
+      <img
+        :src="info.categImage"
+        style="max-width: 100%; max-height: 100%; width: 100px; height: auto;"
+        @error="handlecategImageError"
+      />
+    </td>
     <td>{{ info.price }}</td>
     <td style="display: none">{{ info.id }}</td>
     <td>

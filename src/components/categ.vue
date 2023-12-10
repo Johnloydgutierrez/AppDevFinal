@@ -5,7 +5,7 @@
           
           <div class="mb-3">
             <label for="productName" class="form-label">ProductName</label>
-            <input type="text" v-model="itemId">
+            
             <input type="text" class="form-control" placeholder="productName" v-model="productName" required>
           </div>
           

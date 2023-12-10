@@ -17,7 +17,10 @@
     <th>Model</th>
     <th>Description</th>
     <th>Category</th>
+    <th>Quantity</th>
     <th>CategImage</th>
+    
+    
     <th>price</th>
     
     <th style="display: none">ID</th>
@@ -26,6 +29,8 @@
     <td>{{ info.productName }}</td>
     <td>{{ info.description }}</td>
     <td>{{ info.category }}</td>
+    <td>{{ info.quantity }}</td>
+    
     <td v-if="info.categImage">
       <img
         :src="info.categImage"
@@ -140,5 +145,22 @@ h2 {
 
 .parts-table tr:hover {
   background-color: #e0e0e0; /* Slightly darker gray background on hover */
+}
+.floating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Take full width of the parent */
+  max-width: 800px; /* Limit the maximum width */
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Add a media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .floating-container {
+    padding: 0 10px; /* Add some padding for smaller screens */
+  }
 }
 </style>
