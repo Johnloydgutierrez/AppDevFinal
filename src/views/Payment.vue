@@ -9,99 +9,106 @@
       </div>
     </div>
   </nav>
-        <div class="container-fluid bg-cyan">
-        <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-start rounded p-4">
-                  <h6 class="col mr-2">Ebike Sales</h6>
-                  <div class="table-responsive overflow-auto">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">   
-                                    <th scope="col">Date</th>
-                                   <th scope="col">Customer</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <tr v-for="invoice in invoice" :key="invoice.id">
-          <td>{{ invoice.date }}</td>
-          <td>{{ invoice.customer }}</td>
-          <td>{{ invoice.category }}</td>
-          <td>{{ invoice.product }}</td>
-          <td>{{ invoice.quantity }}</td>
-          <td>{{ invoice.totalAmount }}</td>
-        </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                </div>
-  
-                <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-start rounded p-4">
-                  <h6 class="col mr-2">Parts Sales</h6>
+  <div class="right-container">
+      </div>
+      <div class="container-fluid bg-cyan">
+      <div class="container-fluid pt-4 px-4">
+        <button class="btn btn-primary generate" @click="generatePdf">
+    Generate Report
+</button>
+              <div class="bg-light text-start rounded p-4">
+                <h6 class="col mr-2">Ebike Sales</h6>
                 <div class="table-responsive overflow-auto">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">   
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <tr v-for="invoicep in invoicep" :key="invoicep.id">
-          <td>{{ invoicep.datep }}</td>
-          <td>{{ invoicep.customerp }}</td>
-          <td>{{ invoicep.categoryp }}</td>
-          <td>{{ invoicep.quantityp }}</td>
-          <td>{{ invoicep.totalAmountp }}</td>
-        </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                      <table class="table text-start align-middle table-bordered table-hover mb-0">
+                          <thead>
+                              <tr class="text-dark">  
+                                
+                                  <th scope="col">Date</th>
+                                  <th scope="col">Invoice ID</th>
+                                 <th scope="col">Customer</th>
+                                  <th scope="col">Category</th>
+                                  <th scope="col">Product</th>
+                                  <th scope="col">Qty. EBike</th>
+                                  <th scope="col">Amt. Ebike</th>
+                                  <th scope="col">Parts</th>
+                                  <th scope="col">Qty. Parts</th>
+                                  <th scope="col">Amt. Parts</th>
+                                  <th scope="col">Total Amount</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="invoice in invoice" :key="invoice.id">
+                              
+        <td>{{ invoice.date }}</td>
+        <td>{{ invoice.invoiceID }}</td>
+        <td>{{ invoice.customer }}</td>
+        <td>{{ invoice.category }}</td>
+        <td>{{ invoice.product }}</td>
+        <td>{{ invoice.quantity }}</td>
+        <td>{{ invoice.totalAmount }}</td>
+        <td>{{ invoice.parts }}</td>
+        <td>{{ invoice.quantityp }}</td>
+        <td>{{ invoice.totalAmountp }}</td>
+        <td>{{ invoice.grandAmountp }}</td>
+      </tr>
+                          </tbody>
+                      </table>
+                  </div>
               </div>
-                </div>
               </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        invoice: [],
-      };
+
+            </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  components: {
+ 
+  },
+  data() {
+    return {
+      invoice: [],
+    };
+  },
+  created() {
+    this.getInvoice();
+  },
+  methods: {
+    async getInvoice() {
+      try {
+        const inv = await axios.get('getInvoice');
+        this.invoice = inv.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
-    created() {
-      this.getInvoice();
+    generatePdf() {
+      fetch("http://localhost:8080/generatePdf", {
+        method: "GET", // Use GET instead of POST if you're not sending any data
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+          
+          }
+          return response.blob();
+        })
+        .then((blob) => {
+          const url = window.URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "output.pdf");
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Error generating or loading PDF:", error);
+        });
     },
-    methods: {
-      async getInvoice() {
-        try {
-          const inv = await axios.get('getInvoice');
-          this.invoice = inv.data;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .container-fluid {
-    background-color: rgb(0, 255, 221); /* Set your desired green color code */
-    padding: 20px; /* Adjust padding as needed */
-  }
-  
-  /* Add any additional styles for the container */
-  </style>
-  
+  },
+};
+</script>
