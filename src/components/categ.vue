@@ -58,7 +58,7 @@
           description: '',
           category: '',
           quantity: '',
-          image: '',
+          categImage: '',
           price: '',
           itemId: null,
           sid: '',
@@ -115,7 +115,7 @@
         formData.append('description', this.description);
         formData.append('category', this.category);
         formData.append('quantity', this.quantity);
-        formData.append('image', this.image);
+        formData.append('categImage', this.categImage);
         formData.append('price', this.price);
     
     
@@ -129,7 +129,7 @@
         this.description = "";
         this.category = "";
         this.quantity = "";
-        this.image = "";
+        this.categImage = "";
         this.price = "";
     
         // Refresh the data in the admin view
@@ -165,7 +165,7 @@
               'description': this.description,
               'category': this.category,
               'quantity': this.quantity,
-              'image': this.image,
+              'categImage': this.categImage,
               'price': this.price,
             },
             {
@@ -207,7 +207,7 @@
           formData.append('description', this.description);
           formData.append('category', this.category);
           formData.append('quantity', this.quantity);
-          formData.append('image', this.image);
+          formData.append('categImage', this.categImage);
           formData.append('price', this.price);
     
           return formData;
@@ -219,7 +219,7 @@
           this.category = '';
           this.model = '';
           this.quantity = '';
-          this.image = '';
+          this.categImage = '';
           this.price = '';
         },
       },
