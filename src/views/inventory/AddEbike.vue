@@ -47,8 +47,10 @@
     <td>{{ info.price }}</td>
     <td style="display: none">{{ info.id }}</td>
     <td>
-      <button @click="editItem(info)" class="edit-btn">Edit</button>
-    </td>
+              <v-btn @click="deleteRecord(info.id)" color="indigo" dark>
+                Delete
+              </v-btn>
+            </td>
   </tr>
 </table>
 
@@ -73,6 +75,15 @@ export default {
     this.getInfo();
   },
   methods: {
+    async deleteRecord(recordId) {
+      const confirm = window.confirm("Are you sure you want to delete this? ");
+      if(confirm){
+        await axios.post("delt", {
+        id: recordId,
+      });
+      this.getInfo();
+    }
+  },
     async getInfo() {
       try {
         const inf = await axios.get('/ebikecategGetData');
@@ -100,14 +111,14 @@ export default {
       formComponent.itemId = selectedInfo.id;
       formComponent.isEditing = true;
     },
-    async updateItem(editedItem) {
+    async updateI(editItem) {
       try {
         // Make a PUT request to update the item in your database
-        await axios.put(`updateItem/${editedItem.id}`, editedItem);
+        await axios.put(`updateItem/${editItem.id}`, editItem);
 
         // Update the local data with the edited item
-        const index = this.info.findIndex(item => item.id === editedItem.id);
-        this.$set(this.info, index, editedItem);
+        const index = this.info.findIndex(item => item.id === editItem.id);
+        this.$set(this.info, index, editItem);
 
         
       } catch (error) {
