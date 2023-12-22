@@ -3,6 +3,7 @@ import NhomePage from '../views/NhomePage.vue'
 
 
 
+
 const routes = [
   {
     path: '/Nhome',
@@ -118,6 +119,29 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/sales/Sales.vue'),
     meta:{requiredAuth: true}
   },
+
+  {
+    path: '/Invoice',
+    name: 'Invoicee',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/sales/Invoicee.vue'),
+    meta:{requiredAuth: true}
+  },
+
+  {
+    path: '/products',
+    name: 'ProductView',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/sales/ProductView.vue'),
+    meta:{requiredAuth: true}
+  },
+
+  
+
   
 
 ]
