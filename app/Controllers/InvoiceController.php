@@ -61,24 +61,13 @@ public function saveinvoice()
     $ebikepartsModel = new PartsModel();
     $parts = $ebikepartsModel->find($json->parts);
 
-    // Update quantities in EbikeModel
+   
     $sales = new InvoiceModel();
-    $productt = new EbikeModel();
+    $productt = new PartsModel();
 
     $id = $json->invoiceID;
     $invoiceData = $sales->where('invoiceID', $id)->findAll();
 
-    foreach ($invoiceData as $item) {
-        $productId = $item['productName'];
-        $quantity = $item['quantity'];
-
-        $productData = $productt->find($productId);
-        $newQuantity = $productData['quantity'] - $quantity;
-
-        $productt->update($productId, ['quantity' => $newQuantity]);
-    }
-
-    // Save the invoice data
     $data = [
         'invoiceID' => $json->invoiceID,
         'customer' => $json->customer,
@@ -92,6 +81,19 @@ public function saveinvoice()
         'grandAmountp' => $json->grandAmountp,
     ];
 
+    foreach ($invoiceData as $item) {
+        $productId = $item['name'];
+        $quantity = $item['quantityp'];
+
+        $productData = $productt->find($productId);
+        $newQuantity = $productData['quantity'] - $quantity;
+
+        $productt->update($productId, ['quantityp' => $newQuantity]);
+    }
+
+   
+
+
     $main = new InvoiceModel();
     $main->save($data);
 
@@ -99,26 +101,26 @@ public function saveinvoice()
 }
 
 public function generatePdf(){
-    $model = new InvoiceModel();
-    $data = $model->findAll();
+    $model = new InvoiceModel(); 
+    $data = $model->findAll(); 
 
     // Load mPDF library
     $mpdf = new Mpdf();
 
     // Set your header and footer HTML content
-    $header = '<h1>Your PDF Header</h1>';
-    $footer = '<div style="text-align: center; font-style: italic;">Your PDF Footer</div>';
+    $header = '<h1 style="text-align: center;">NWOW</h1>';
+    $footer = '<div style="text-align: center; font-style: italic;">Capio | Cruz | Gutierrez</div>';
 
     // Set header and footer
     $mpdf->SetHTMLHeader($header);
     $mpdf->SetHTMLFooter($footer);
 
     // Create PDF content
-    $html = '<h2>Data from Database</h2>';
+    $html = '<h2 style="text-align: center;">________________________________________________________</h2>';
 
     // Add a table
     $html .= '<table border="1" cellspacing="0" cellpadding="5">';
-
+    
     // Add table headers
     $html .= '<tr>';
     foreach (array_keys((array)$data[0]) as $header) {
@@ -145,21 +147,11 @@ public function generatePdf(){
 
     // Send appropriate headers
     header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="output.pdf"');
+    header('Content-Disposition: attachment; filename="invoice.pdf"');
     header('Content-Length: ' . strlen($pdfContent));
 
     // Output the PDF content
     echo $pdfContent;
 
-}
-
-
-public function getChartData()
-{
-    // Retrieve data from the database (replace this with your actual database logic)
-    $chartData = $this->InvoiceModel->getChartData();
-
-    // Return data as JSON
-    return $this->response->setJSON($chartData);
 }
 }
