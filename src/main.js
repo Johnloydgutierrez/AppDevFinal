@@ -6,6 +6,7 @@ import { loadFonts } from './plugins/webfontloader'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import axios from 'axios'
+import '@mdi/font/css/materialdesignicons.css';
 loadFonts()
 
 axios.defaults.baseURL="http://backend.test/"

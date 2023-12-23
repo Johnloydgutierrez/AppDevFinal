@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import NhomePage from '../views/NhomePage.vue'
+import  HistoryPage from '../views/sales/HistoryPage.vue'
 
 
 
@@ -140,7 +141,9 @@ const routes = [
     meta:{requiredAuth: true}
   },
 
-  
+  { path: '/history/:upc', name: 'history',  component: HistoryPage },
+
+
 
   
 

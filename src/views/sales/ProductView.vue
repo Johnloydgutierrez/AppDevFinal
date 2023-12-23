@@ -1,4 +1,15 @@
 <template>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+  <div class="container">
+    <router-link to="/Admin" class="navbar-brand bg-black">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 20 19">
+<path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+</svg>Back</router-link>  
+<router-link to="/Invoice" class="navbar-brand bg-black">Create Invoice</router-link> 
+    <div class="collapse navbar-collapse" id="navbarNav">   
+    </div>
+  </div>
+</nav>
     <v-data-table
       :headers="headers"
       :items="desserts"
@@ -8,7 +19,7 @@
         <v-toolbar
           flat
         >
-          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-toolbar-title>Product List</v-toolbar-title>
           <v-divider
             class="mx-4"
             inset
@@ -123,7 +134,14 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:itemactions="{ item }">
+      <template v-slot:item.actions="{ item }">
+        <v-icon
+          size="small"
+          class="me-2"
+          @click="openVoidModal(item)"
+        >
+        mdi-circle
+        </v-icon>
         <v-icon
           size="small"
           class="me-2"
@@ -133,19 +151,21 @@
         </v-icon>
         <v-icon
           size="small"
+          class="me-2"
           @click="openQuantityModal(item)"
         >
           mdi-plus
         </v-icon>
         
         <router-link :to="{ name: 'history', params: { upc: item.upc } }">
-  <v-icon size="small">mdi-history</v-icon>
+  <v-icon size="small" class="me-2">mdi-history</v-icon>
 </router-link>
 
       </template>
       <template v-slot:no-data>
         <v-btn
           color="primary"
+          class="me-2"
           @click="initialize"
         >
           Reset
@@ -165,6 +185,19 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="VoidModal" max-width="400">
+      <v-card>
+        <v-card-title>Void</v-card-title>
+        <v-card-text>
+          <!-- Your quantity input field and other necessary fields go here -->
+          <v-text-field v-model="VoidToAdd" label="Void"></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="addVoid">Add</v-btn>
+          <v-btn @click="closeVoidModal">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </template>
   <script>
   import axios from 'axios'
@@ -172,8 +205,10 @@
       data: () => ({
         dialog: false,
         quantityModal: false,
+        VoidModal: false,
         selectedProduct: null,
         quantityToAdd: 0,
+        VoidToAdd: 0,
         search: '',
         dialogDelete: false,
       headers: [
@@ -240,6 +275,18 @@
         this.quantityToAdd = 0;
         this.quantityModal = false;
       },
+
+      openVoidModal(item) {
+        this.selectedProduct = item;
+        this.VoidToAdd = 0;
+        this.VoidModal = true;
+      },
+      closeVoidModal() {
+        this.selectedProduct = null;
+        this.VoidToAdd = 0;
+        this.VoidModal = false;
+      },
+
       async addQuantity() {
         const updatedProduct = { ...this.selectedProduct };
         updatedProduct.quantity += parseInt(this.quantityToAdd);
@@ -250,6 +297,17 @@
         const index = this.desserts.findIndex((product) => product.upc === updatedProduct.upc);
         this.initialize();
         this.closeQuantityModal();
+      },
+      async addVoid() {
+        const updatedProduct = { ...this.selectedProduct };
+        updatedProduct.quantity += parseInt(this.VoidToAdd);
+        await axios.post('api/updateVoid', {
+          upc: updatedProduct.upc,
+          quantity: this.VoidToAdd,
+        });
+        const index = this.desserts.findIndex((product) => product.upc === updatedProduct.upc);
+        this.initialize();
+        this.closeVoidModal();
       },
           async  initialize () {
           const data = await axios.get('api/getProducts');

@@ -40,8 +40,7 @@
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Inventory</h6>
-          <a class="collapse-item" href="/AddEbike">E-Bike List</a>
-          <a class="collapse-item" href="/AddParts">Ebike Parts Products</a>
+          <a class="collapse-item" href="/products">Products</a>
       </div>
   </div>
 
@@ -86,7 +85,7 @@
       data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Sales Management:</h6>
-          <a class="collapse-item" href="Sales">Sales</a>
+          <a class="collapse-item" href="/Invoice">Sales</a>
           
       </div>
   </div>
