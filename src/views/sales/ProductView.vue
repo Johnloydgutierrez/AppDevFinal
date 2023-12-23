@@ -123,7 +123,7 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:itemactions="{ item }">
         <v-icon
           size="small"
           class="me-2"
@@ -139,9 +139,9 @@
         </v-icon>
         
         <router-link :to="{ name: 'history', params: { upc: item.upc } }">
-        <v-icon size="small">mdi-history</v-icon>
-      </router-link>
-        
+  <v-icon size="small">mdi-history</v-icon>
+</router-link>
+
       </template>
       <template v-slot:no-data>
         <v-btn
